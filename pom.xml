@@ -61,6 +61,12 @@
             <artifactId>jedis</artifactId>
         </dependency>
 
+        <!-- 用于redis Object类的序列化 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
         <!-- Testing Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
