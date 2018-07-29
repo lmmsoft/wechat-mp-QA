@@ -2,8 +2,6 @@ package com.github.binarywang.demo.wx.mp.model;
 
 import java.util.List;
 
-import javax.validation.constraints.Null;
-
 /**
  * Created by lmm333 on 2018/7/28.
  */
@@ -41,6 +39,10 @@ public class Model {
         int questionId;
         int userAnswerIndex;
         long time;
+    }
+
+    class MessageLog {
+        //text, image
     }
 
     public interface IQA {
