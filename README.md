@@ -25,12 +25,32 @@
 
 ## redis in docker
 1. docker 安装：
-
+```
     docker pull redis # 下载redis镜像
     docker run -p 6379:6379 --name redis redis:latest # 运行容器， 将容器的6379端口映射到主机的6379端口
     docker ps # 列出容器列表
     docker exec -it 43f7a65ec7f8 redis-cli # 运行redis-cli
-2. 
+    docker exec -it 81 redis-benchmark -n 100000 -q # 同时执行10万个请求测试性能
+```
+
+## mysql in docker
+1. docker 安装：
+    ```
+    docker search mysql
+    docker pull mysql
+    docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
+    docker run -p 3306:3306 --name mymysql -v /opt/docker_v/mysql/conf:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 -d imageID
+    docker run -p 3306:3306 --name mymysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest --default-authentication-plugin=mysql_native_password
+    docker run -p 3406:3306 --name mymysql -e MYSQL_ROOT_PASSWORD=mypassword -d mysql
+    ```
+
+2. [Link to Docker Hub](https://hub.docker.com/_/mysql/)
+2. Meet error: Unable to load authentication plugin 'caching_sha2_password', then use
+    ```
+    docker exec -it CONTAINER_ID bash
+    mysql --user=root --password=123456    
+    ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY '123456';
+    ```
 
 
 接收微信请求：[signature=[0382770341aee8d8e79abc3d02768767a2b779c7], encType=[aes], msgSignature=[1b39e6edb229216efd120418b7e33e2a979acbdc], timestamp=[1532838523], nonce=[258257664], requestBody=[

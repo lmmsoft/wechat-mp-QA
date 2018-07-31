@@ -12,6 +12,6 @@ class HelloWorldController {
     @ResponseBody
     @RequestMapping(value = "hello")
     public HelloWorldModel helloworld() {
-        return new HelloWorldModel("myname", 1, 80.88f);
+        return new HelloWorldModel(1, "myname", 80.88f);
     }
 }
