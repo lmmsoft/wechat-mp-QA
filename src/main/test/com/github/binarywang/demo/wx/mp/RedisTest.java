@@ -20,7 +20,7 @@ public class RedisTest {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Test
     public void test() {
@@ -33,7 +33,7 @@ public class RedisTest {
     @Test
     public void testObj() throws Exception {
         User user = new User(1, "aa", "aa@126.com");
-        ValueOperations<Object, Object> operations = redisTemplate.opsForValue();
+        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
         operations.set("userKey", user);
         operations.set("userKey.timeout", user, 1, TimeUnit.SECONDS);
 
