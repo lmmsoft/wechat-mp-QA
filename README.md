@@ -51,7 +51,12 @@
     mysql --user=root --password=123456    
     ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY '123456';
     ```
-
+3. 还是不行，改安装mysql 5.7
+    ```
+    $ docker pull mysql:5.7
+    $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -d mysql:5.7
+    
+    ```
 
 接收微信请求：[signature=[0382770341aee8d8e79abc3d02768767a2b779c7], encType=[aes], msgSignature=[1b39e6edb229216efd120418b7e33e2a979acbdc], timestamp=[1532838523], nonce=[258257664], requestBody=[
 <xml>
