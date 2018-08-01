@@ -58,6 +58,7 @@
     
     ```
 
+```
 接收微信请求：[signature=[0382770341aee8d8e79abc3d02768767a2b779c7], encType=[aes], msgSignature=[1b39e6edb229216efd120418b7e33e2a979acbdc], timestamp=[1532838523], nonce=[258257664], requestBody=[
 <xml>
     <ToUserName><![CDATA[gh_ac6bbe3aac55]]></ToUserName>
@@ -186,3 +187,4 @@ WxMpXmlMessage[
 </xml>] as "application/xml;charset=UTF-8" using [org.springframework.http.converter.StringHttpMessageConverter@18a645fd]
 2018-07-29 12:47:26.718 DEBUG 5415 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Null ModelAndView returned to DispatcherServlet with name 'dispatcherServlet': assuming HandlerAdapter completed request handling
 2018-07-29 12:47:26.718 DEBUG 5415 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Successfully completed request
+```

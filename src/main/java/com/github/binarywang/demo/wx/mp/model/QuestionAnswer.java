@@ -19,14 +19,14 @@ public class QuestionAnswer implements IQA {
     }
 
     @Override
-    public boolean insertUserAnswer(String wechatId, int qid, int answer) {
+    public boolean insertUserAnswer(String wechatUserId, int qid, int answer) {
 
         UserAnswer userAnswer = new UserAnswer();
-        userAnswer.wechatId = wechatId;
+        userAnswer.wechatUserId = wechatUserId;
         userAnswer.questionId = qid;
         userAnswer.userAnswerIndex = answer;
 
-        redisService.set(wechatId, userAnswer);
+        redisService.set(wechatUserId, userAnswer);
 
         return true;
     }
