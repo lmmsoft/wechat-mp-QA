@@ -19,7 +19,7 @@ public interface UserMapper {
     void update(User user);
 
     @Delete("DELETE FROM t_user WHERE id = #{id}")
-    void deleteById(Integer id);
+    void deleteById(int id);
 
     @Delete("DELETE FROM t_user WHERE wechatUserId = #{wechatUserId}")
     void deleteByWechatUserId(String wechatUserId);

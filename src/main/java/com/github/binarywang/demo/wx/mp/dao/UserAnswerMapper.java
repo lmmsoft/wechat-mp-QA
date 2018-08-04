@@ -2,6 +2,7 @@ package com.github.binarywang.demo.wx.mp.dao;
 
 import com.github.binarywang.demo.wx.mp.model.UserAnswer;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -15,7 +16,7 @@ public interface UserAnswerMapper {
     void insert(UserAnswer userAnswer);
 
     @Insert("REPLACE INTO t_user_answer(wechatUserId, questionId, userAnswerIndex, updateTime) VALUES( #{wechatUserId}, #{questionId}, #{userAnswerIndex}, #{updateTime} )")
-    void replace(UserAnswer userAnswer);
+    boolean replace(UserAnswer userAnswer);
 
     @Update("UPDATE t_user_answer SET questionId = #{questionId}, userAnswerIndex = #{userAnswerIndex}, updateTime = #{updateTime} WHERE wechatUserId = #{wechatUserId}")
     void update(UserAnswer userAnswer);
@@ -28,4 +29,7 @@ public interface UserAnswerMapper {
 
     @Select("SELECT * FROM t_user_answer")
     List<UserAnswer> findAll();
+
+    @Delete("DELETE FROM t_user_answer WHERE id = #{id}")
+    void deleteById(int id);
 }

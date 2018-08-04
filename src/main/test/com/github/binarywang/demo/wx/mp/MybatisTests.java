@@ -7,7 +7,9 @@ import com.github.binarywang.demo.wx.mp.model.HelloWorldModel;
 import com.github.binarywang.demo.wx.mp.model.User;
 import com.github.binarywang.demo.wx.mp.model.UserAnswer;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,21 @@ public class MybatisTests {
     @Autowired
     private UserAnswerMapper userAnswerMapper;
 
+    @Before
+    @After
+    public void cleanUp() {
+        for (HelloWorldModel helloWorldModel : helloWorldMapper.findAll()) {
+            helloWorldMapper.delete(helloWorldModel.getId());
+        }
+
+        for (User user : userMapper.findAll()) {
+            userMapper.deleteById(user.getId());
+        }
+
+        for (UserAnswer userAnswer : userAnswerMapper.findAll()) {
+            userAnswerMapper.deleteById(userAnswer.getId());
+        }
+    }
 
     @Test
     public void helloWorldMapperTest() {
@@ -59,7 +76,18 @@ public class MybatisTests {
         String wechatName = "tom";
 
         User user1 = new User(wechatUserId, null, null, null, 0);
+
         userMapper.insert(user1);
+        Assert.assertEquals(1, userMapper.findAll().size());
+
+        boolean exceptionHappened = false;
+        try {
+            userMapper.insert(user1);
+        } catch (org.springframework.dao.DuplicateKeyException e) {
+            exceptionHappened = true;
+        }
+        Assert.assertTrue(exceptionHappened);
+        Assert.assertEquals(1, userMapper.findAll().size());
 
         User user2 = userMapper.findByWechatUserId("no-user");
         Assert.assertNull(user2);
