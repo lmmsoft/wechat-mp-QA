@@ -5,6 +5,9 @@ public class HelloWorldModel {
     private String name;
     private float weight;
 
+    public HelloWorldModel() {
+    }
+
     public HelloWorldModel(int id, String name, float weight) {
         this.id = id;
         this.name = name;

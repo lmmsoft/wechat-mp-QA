@@ -1,5 +1,7 @@
 package com.github.binarywang.demo.wx.mp;
 
+import com.github.binarywang.demo.wx.mp.model.HelloWorldModel;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,13 +34,13 @@ public class RedisTest {
 
     @Test
     public void testObj() throws Exception {
-        User user = new User(1, "aa", "aa@126.com");
+        HelloWorldModel helloWorldModel = new HelloWorldModel(1, "aa", 81.8f);
         ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-        operations.set("userKey", user);
-        operations.set("userKey.timeout", user, 1, TimeUnit.SECONDS);
+        operations.set("userKey", helloWorldModel);
+        operations.set("userKey.timeout", helloWorldModel, 1, TimeUnit.SECONDS);
 
-        Assert.assertEquals("aa", ((User) operations.get("userKey")).name);
-        Assert.assertEquals("aa", ((User) operations.get("userKey.timeout")).name);
+        Assert.assertEquals("aa", ((HelloWorldModel) operations.get("userKey")).getName());
+        Assert.assertEquals("aa", ((HelloWorldModel) operations.get("userKey.timeout")).getName());
 
         Thread.sleep(1000);
         //redisTemplate.delete("userKey.timeout");
