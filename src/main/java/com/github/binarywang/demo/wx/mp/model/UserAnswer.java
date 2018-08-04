@@ -3,10 +3,11 @@ package com.github.binarywang.demo.wx.mp.model;
 import java.sql.Timestamp;
 
 public class UserAnswer {
-    String wechatUserId;
+
     private int id;
-    int questionId;
-    int userAnswerIndex;
+    private String wechatUserId;
+    private int questionId;
+    private int userAnswerIndex;
     private Timestamp updateTime;
 
     public UserAnswer() {

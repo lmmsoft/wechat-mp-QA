@@ -1,7 +1,9 @@
 package com.github.binarywang.demo.wx.mp.handler;
 
 import com.github.binarywang.demo.wx.mp.builder.TextBuilder;
+import com.github.binarywang.demo.wx.mp.service.MsgService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -11,13 +13,14 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 
-import static me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
-
 /**
  * @author Binary Wang(https://github.com/binarywang)
  */
 @Component
 public class MsgHandler extends AbstractHandler {
+
+    @Autowired
+    MsgService msgService;
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
@@ -25,10 +28,9 @@ public class MsgHandler extends AbstractHandler {
                                     WxMpService weixinService,
                                     WxSessionManager sessionManager) {
 
-        if (!wxMessage.getMsgType().equals(XmlMsgType.EVENT)) {
-            //TODO 可以选择将消息保存到本地
-        }
-
+//        if (!wxMessage.getMsgType().equals(XmlMsgType.EVENT)) {
+//            //TODO 可以选择将消息保存到本地
+//        }
 //        //当用户输入关键词如“你好”，“客服”等，并且有客服在线时，把消息转发给在线客服
 //        try {
 //            if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服")
@@ -41,10 +43,10 @@ public class MsgHandler extends AbstractHandler {
 //        } catch (WxErrorException e) {
 //            e.printStackTrace();
 //        }
-
-        //TODO 组装回复消息
 //        String content = "收到信息内容：" + JsonUtils.toJson(wxMessage);
-        String content = "收到信息内容：" + wxMessage.getContent();
+
+
+        String content = msgService.handleWechatMessages(wxMessage);
 
         return new TextBuilder().build(content, wxMessage, weixinService);
     }

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by lmm333 on 2018/7/31.
  */
-class Question {
+public class Question {
     int questionId;
     String questionTitle;//第一题
     String questionType;//送分题

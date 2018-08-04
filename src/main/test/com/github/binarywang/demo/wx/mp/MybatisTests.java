@@ -1,8 +1,5 @@
 package com.github.binarywang.demo.wx.mp;
 
-import com.github.binarywang.demo.wx.mp.dao.HelloWorldMapper;
-import com.github.binarywang.demo.wx.mp.dao.UserAnswerMapper;
-import com.github.binarywang.demo.wx.mp.dao.UserMapper;
 import com.github.binarywang.demo.wx.mp.model.HelloWorldModel;
 import com.github.binarywang.demo.wx.mp.model.User;
 import com.github.binarywang.demo.wx.mp.model.UserAnswer;
@@ -12,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,30 +17,12 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MybatisTests {
-
-    @Autowired
-    private HelloWorldMapper helloWorldMapper;
-
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private UserAnswerMapper userAnswerMapper;
+public class MybatisTests extends BaseDataBaseTest {
 
     @Before
     @After
     public void cleanUp() {
-        for (HelloWorldModel helloWorldModel : helloWorldMapper.findAll()) {
-            helloWorldMapper.delete(helloWorldModel.getId());
-        }
-
-        for (User user : userMapper.findAll()) {
-            userMapper.deleteById(user.getId());
-        }
-
-        for (UserAnswer userAnswer : userAnswerMapper.findAll()) {
-            userAnswerMapper.deleteById(userAnswer.getId());
-        }
+        initDatabase();
     }
 
     @Test
