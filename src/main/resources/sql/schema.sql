@@ -1,10 +1,9 @@
-DROP DATABASE marriage;
+DROP DATABASE IF EXISTS marriage;
 CREATE DATABASE marriage;
 
 USE marriage;
 
-DROP TABLE t_hello_world;
-
+DROP TABLE IF EXISTS `t_hello_world`;
 CREATE TABLE t_hello_world (
   id     int          NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name   VARCHAR(255) NOT NULL,
@@ -13,6 +12,7 @@ CREATE TABLE t_hello_world (
   ENGINE = INNODB
   DEFAULT CHARSET = utf8mb4;
 
+DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE t_user (
   id             int          NOT NULL PRIMARY KEY  AUTO_INCREMENT,
   wechatUserId   VARCHAR(255) NOT NULL UNIQUE,
@@ -23,12 +23,13 @@ CREATE TABLE t_user (
 )
   DEFAULT CHARSET = utf8mb4;
 
-
+DROP TABLE IF EXISTS `t_user_answer`;
 CREATE TABLE t_user_answer (
   id              INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
   wechatUserId    VARCHAR(255) NOT NULL,
   questionId      INT          NOT NULL,
   userAnswerIndex int          NOT NULL,
-  updateTime      DATETIME     NOT NULL             DEFAULT CURRENT_TIMESTAMP
+  updateTime      DATETIME     NOT NULL             DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY `wechatUserId` (`wechatUserId`,`questionId`)
 )
   DEFAULT CHARSET = utf8mb4;

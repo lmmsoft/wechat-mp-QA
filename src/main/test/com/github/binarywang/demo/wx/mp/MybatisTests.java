@@ -116,27 +116,45 @@ public class MybatisTests {
     public void userAnswerMapperMapperTest() {
         String wechatUserId1 = "ok3SF1s4vWK48-1aM3b4p9gMq3B1";
         String wechatUserId2 = "ok3SF1s4vWK48-1aM3b4p9gMq3B2";
-        int questionId = 101;
+        int questionId1 = 101;
+        int questionId2 = 102;
         int userAnswerIndex1 = 81;
         int userAnswerIndex2 = 82;
         Timestamp updateTime = new Timestamp(System.currentTimeMillis());
 
-        // Add user1
-        UserAnswer userAnswer1 = new UserAnswer(wechatUserId1, questionId, userAnswerIndex1, updateTime);
+        // Add user1-q1
+        UserAnswer userAnswer1 = new UserAnswer(wechatUserId1, questionId1, userAnswerIndex1, updateTime);
         userAnswerMapper.insert(userAnswer1);
         Assert.assertEquals(1, userAnswerMapper.findAll().size());
 
-        // Add user2
-        UserAnswer userAnswer2 = new UserAnswer(wechatUserId2, questionId, userAnswerIndex2, updateTime);
+        // Add user2-q1
+        UserAnswer userAnswer2 = new UserAnswer(wechatUserId2, questionId1, userAnswerIndex2, updateTime);
         userAnswerMapper.replace(userAnswer2);
         Assert.assertEquals(2, userAnswerMapper.findAll().size());
 
-        Assert.assertEquals(2, userAnswerMapper.findByQuestionId(questionId).size());
+        Assert.assertEquals(2, userAnswerMapper.findByQuestionId(questionId1).size());
         Assert.assertEquals(1, userAnswerMapper.findByUserAnswerIndex(userAnswerIndex1).size());
 
-        // Update user2
-        UserAnswer userAnswer3 = new UserAnswer(wechatUserId2, questionId, userAnswerIndex1, updateTime);
+        // Update user2-q1
+        UserAnswer userAnswer3 = new UserAnswer(wechatUserId2, questionId1, userAnswerIndex1, updateTime);
         userAnswerMapper.update(userAnswer3);
         Assert.assertEquals(2, userAnswerMapper.findByUserAnswerIndex(userAnswerIndex1).size());
+
+        // Test unique key of [wecahtUserId,questionId1]
+        UserAnswer u1q1 = new UserAnswer(wechatUserId1, questionId1, userAnswerIndex1, updateTime);
+        userAnswerMapper.replace(u1q1);
+        Assert.assertEquals(2, userAnswerMapper.findAll().size());
+
+        UserAnswer u1q2 = new UserAnswer(wechatUserId1, questionId2, userAnswerIndex1, updateTime);
+        userAnswerMapper.replace(u1q2);
+        Assert.assertEquals(3, userAnswerMapper.findAll().size());
+
+        UserAnswer u2q1 = new UserAnswer(wechatUserId2, questionId1, userAnswerIndex1, updateTime);
+        userAnswerMapper.replace(u2q1);
+        Assert.assertEquals(3, userAnswerMapper.findAll().size());
+
+        UserAnswer u2q2 = new UserAnswer(wechatUserId2, questionId2, userAnswerIndex1, updateTime);
+        userAnswerMapper.replace(u2q2);
+        Assert.assertEquals(4, userAnswerMapper.findAll().size());
     }
 }
