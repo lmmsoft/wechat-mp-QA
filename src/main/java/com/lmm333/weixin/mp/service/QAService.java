@@ -1,10 +1,13 @@
 package com.lmm333.weixin.mp.service;
 
 import com.lmm333.weixin.mp.model.Enum;
+import com.lmm333.weixin.mp.model.Result;
 import com.lmm333.weixin.mp.model.User;
 import com.lmm333.weixin.mp.model.UserAnswer;
 
 public interface QAService {
+    int RESULE_SUCCEED = 0;
+    int RESULE_INVALID_QUESTION_ID = 1;
 
     //boolean init(List<Question> questionList);
 
@@ -12,5 +15,5 @@ public interface QAService {
 
     int findQuestionIdFromAnswerId(int answerId);
 
-    //List<Integer> getUserList(int qid, int answerIndex);
+    Result findResultFromQuestionId(int questionId);
 }

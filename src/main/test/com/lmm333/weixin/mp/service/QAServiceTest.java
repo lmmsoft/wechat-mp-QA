@@ -2,6 +2,7 @@ package com.lmm333.weixin.mp.service;
 
 import com.lmm333.weixin.mp.BaseDataBaseTest;
 import com.lmm333.weixin.mp.model.Enum;
+import com.lmm333.weixin.mp.model.Result;
 import com.lmm333.weixin.mp.model.User;
 import com.lmm333.weixin.mp.model.UserAnswer;
 
@@ -63,5 +64,44 @@ public class QAServiceTest extends BaseDataBaseTest {
 
         Assert.assertEquals(-1, qaService.findQuestionIdFromAnswerId(15));
         Assert.assertEquals(-1, qaService.findQuestionIdFromAnswerId(-1));
+    }
+
+    @Test
+    public void findResultFromQuestionId() {
+        // No result
+        Result result = qaService.findResultFromQuestionId(123);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(qaService.RESULE_INVALID_QUESTION_ID, result.resultType);
+        Assert.assertEquals(123, result.questionId);
+        Assert.assertNull(result.answerList);
+        Assert.assertNull(result.userList);
+
+        // Has result, but no user
+        result = qaService.findResultFromQuestionId(1);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(qaService.RESULE_SUCCEED, result.resultType);
+        Assert.assertEquals(1, result.questionId);
+        Assert.assertEquals(11, result.rightAnswerId);
+        Assert.assertEquals(4, result.answerList.size());//11,12,13,14
+        Assert.assertEquals(0, result.userList.size());
+
+        //Has result and user
+        String wechatUserId1 = "user1";
+        String wechatUserId2 = "user2";
+        int questionId1 = 1;
+        int questionId2 = 2;
+        int userAnswerIndex1 = 11;
+        int userAnswerIndex2 = 12;
+        Timestamp updateTime = new Timestamp(System.currentTimeMillis());
+
+        prepareDataForTest(wechatUserId1, wechatUserId2, questionId1, questionId2, userAnswerIndex1, userAnswerIndex2, updateTime);
+
+        result = qaService.findResultFromQuestionId(questionId1);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(qaService.RESULE_SUCCEED, result.resultType);
+        Assert.assertEquals(questionId1, result.questionId);
+        Assert.assertEquals(userAnswerIndex1, result.rightAnswerId);
+        Assert.assertEquals(4, result.answerList.size());//11,12,13,14
+        Assert.assertEquals(2, result.userList.size());
     }
 }

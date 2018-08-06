@@ -1,5 +1,7 @@
 package com.lmm333.weixin.mp.dao;
 
+import com.lmm333.weixin.mp.model.Answer;
+import com.lmm333.weixin.mp.model.User;
 import com.lmm333.weixin.mp.model.UserAnswer;
 
 import org.apache.ibatis.annotations.Delete;
@@ -43,4 +45,18 @@ public interface UserAnswerMapper {
             " FROM t_user_answer" +
             " WHERE id = #{id}")
     void deleteById(int id);
+
+    @Select("SELECT * " +
+            " FROM t_user, t_user_answer " +
+            " WHERE t_user.wechatUserId = t_user_answer.wechatUserId AND t_user_answer.userAnswerIndex = #{userAnswerIndex}")
+    List<User> findUserByAnswerId(@Param("userAnswerIndex") int userAnswerIndex);
+
+    // answerId count
+    // 11       2
+    // 12       1
+    @Select("SELECT userAnswerIndex AS answerId, count(*) AS userCount" +
+            " FROM t_user_answer " +
+            " WHERE questionId = #{questionId} " +
+            " GROUP BY userAnswerIndex")
+    List<Answer> findAnswerListByQuestionId(@Param("questionId") int questionId);
 }
