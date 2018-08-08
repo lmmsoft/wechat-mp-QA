@@ -54,7 +54,7 @@ public class MsgServiceTest extends BaseDataBaseTest {
                         "fromUser",
                         System.currentTimeMillis() / 1000L, 11));
 
-        userMapper.update(new User("fromUser", null, null, null, 1));
+        userMapper.update(new User("fromUser", 1));
         Assert.assertEquals("第1题的答案已收到，愿您中奖~！",
                 msgService.handleAnswer(
                         "content",

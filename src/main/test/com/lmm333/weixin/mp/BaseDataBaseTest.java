@@ -15,11 +15,11 @@ import javax.annotation.Resource;
 
 public class BaseDataBaseTest {
     @Resource
-    protected HelloWorldMapper helloWorldMapper;
+    HelloWorldMapper helloWorldMapper;
     @Resource
     protected UserMapper userMapper;
     @Resource
-    protected UserAnswerMapper userAnswerMapper;
+    UserAnswerMapper userAnswerMapper;
 
     protected void initDatabase() {
         for (HelloWorldModel helloWorldModel : helloWorldMapper.findAll()) {
@@ -36,8 +36,8 @@ public class BaseDataBaseTest {
     }
 
     protected void prepareDataForTest(String wechatUserId1, String wechatUserId2, int questionId1, int questionId2, int userAnswerIndex1, int userAnswerIndex2, Timestamp updateTime) {
-        User user1 = new User(wechatUserId1, null, null, null, 0);
-        User user2 = new User(wechatUserId2, null, null, null, 0);
+        User user1 = new User(wechatUserId1, 0);
+        User user2 = new User(wechatUserId2, 0);
         userMapper.insert(user1);
         userMapper.insert(user2);
         Assert.assertEquals(2, userMapper.findAll().size());

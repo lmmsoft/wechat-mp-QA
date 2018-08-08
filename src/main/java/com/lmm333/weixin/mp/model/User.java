@@ -3,19 +3,29 @@ package com.lmm333.weixin.mp.model;
 public class User {
     private int id;
     private String wechatUserId;
-    private String wechatName;
-    private String wechatImageUrl;
-    private String userName;
-    private int registerType;//0已关注没注册 1微信注册 2个人注册 9已取关
+    private Integer registerType;//0已关注没注册 1微信注册 2个人注册 9已取关
+
+    private String nickname;
+    private String headimgurl;
+    private String userName;//个人设置的用户名，暂时没用
+
+    private String sex;
+    private String language;
+    private String city;
+    private String province;
+    private String country;
+
+    private String access_token;
+    private String refresh_token;
+    private String unionid;
+    private String openid;
+    private String code;
 
     public User() {
     }
 
-    public User(String wechatUserId, String wechatName, String wechatImageUrl, String userName, int registerType) {
+    public User(String wechatUserId, int registerType) {
         this.wechatUserId = wechatUserId;
-        this.wechatName = wechatName;
-        this.wechatImageUrl = wechatImageUrl;
-        this.userName = userName;
         this.registerType = registerType;
     }
 
@@ -23,47 +33,145 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
+    public User setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getWechatUserId() {
         return wechatUserId;
     }
 
-    public void setWechatUserId(String wechatUserId) {
+    public User setWechatUserId(String wechatUserId) {
         this.wechatUserId = wechatUserId;
+        return this;
     }
 
-    public String getWechatName() {
-        return wechatName;
+    public Integer getRegisterType() {
+        return registerType;
     }
 
-    public void setWechatName(String wechatName) {
-        this.wechatName = wechatName;
+    public User setRegisterType(Integer registerType) {
+        this.registerType = registerType;
+        return this;
     }
 
-    public String getWechatImageUrl() {
-        return wechatImageUrl;
+
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setWechatImageUrl(String wechatImageUrl) {
-        this.wechatImageUrl = wechatImageUrl;
+    public User setNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    public String getHeadimgurl() {
+        return headimgurl;
+    }
+
+    public User setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl;
+        return this;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public User setUserName(String userName) {
         this.userName = userName;
+        return this;
     }
 
-    public int getRegisterType() {
-        return registerType;
+
+    public String getSex() {
+        return sex;
     }
 
-    public void setRegisterType(int registerType) {
-        this.registerType = registerType;
+    public User setSex(String sex) {
+        this.sex = sex;
+        return this;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public User setLanguage(String language) {
+        this.language = language;
+        return this;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public User setCity(String city) {
+        this.city = city;
+        return this;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public User setProvince(String province) {
+        this.province = province;
+        return this;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public User setCountry(String country) {
+        this.country = country;
+        return this;
+    }
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public User setAccess_token(String access_token) {
+        this.access_token = access_token;
+        return this;
+    }
+
+    public String getRefresh_token() {
+        return refresh_token;
+    }
+
+    public User setRefresh_token(String refresh_token) {
+        this.refresh_token = refresh_token;
+        return this;
+    }
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public User setUnionid(String unionid) {
+        this.unionid = unionid;
+        return this;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public User setOpenid(String openid) {
+        this.openid = openid;
+        return this;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public User setCode(String code) {
+        this.code = code;
+        return this;
     }
 }

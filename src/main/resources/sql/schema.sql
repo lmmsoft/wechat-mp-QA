@@ -14,12 +14,22 @@ CREATE TABLE t_hello_world (
 
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE t_user (
-  id             int          NOT NULL PRIMARY KEY  AUTO_INCREMENT,
-  wechatUserId   VARCHAR(255) NOT NULL UNIQUE,
-  wechatName     VARCHAR(255),
-  wechatImageUrl VARCHAR(255),
-  userName       VARCHAR(255),
-  registerType   int          NOT NULL
+  id            int          NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+  wechatUserId  VARCHAR(255) NOT NULL UNIQUE,
+  registerType  int          NOT NULL,
+  nickname      VARCHAR(255),
+  headimgurl    VARCHAR(2083),
+  userName      VARCHAR(255),
+  sex           VARCHAR(255),
+  language      VARCHAR(255),
+  city          VARCHAR(255),
+  province      VARCHAR(255),
+  country       VARCHAR(255),
+  access_token  VARCHAR(255),
+  refresh_token VARCHAR(255),
+  unionid       VARCHAR(255),
+  openid        VARCHAR(255),
+  code          VARCHAR(255)
 )
   DEFAULT CHARSET = utf8mb4;
 
@@ -30,6 +40,6 @@ CREATE TABLE t_user_answer (
   questionId      INT          NOT NULL,
   userAnswerIndex int          NOT NULL,
   updateTime      DATETIME     NOT NULL             DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `wechatUserId` (`wechatUserId`,`questionId`)
+  UNIQUE KEY `wechatUserId` (`wechatUserId`, `questionId`)
 )
   DEFAULT CHARSET = utf8mb4;

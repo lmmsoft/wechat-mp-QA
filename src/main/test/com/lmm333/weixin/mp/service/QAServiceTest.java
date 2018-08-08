@@ -40,8 +40,8 @@ public class QAServiceTest extends BaseDataBaseTest {
         int answerid2 = 22;
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        User user1 = new User(userId1, null, null, null, 0);
-        User user2 = new User(userId2, null, null, null, 1);
+        User user1 = new User(userId1, 0);
+        User user2 = new User(userId2, 1);
 
         UserAnswer userAnswer1 = new UserAnswer(userId1, qid1, answerid1, timestamp);
         UserAnswer userAnswer2 = new UserAnswer(userId1, qid2, answerid2, timestamp);

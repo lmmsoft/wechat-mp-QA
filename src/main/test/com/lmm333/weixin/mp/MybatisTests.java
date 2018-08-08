@@ -52,9 +52,9 @@ public class MybatisTests extends BaseDataBaseTest {
     @Test
     public void userMapperTest() {
         String wechatUserId = "ok3SF1s4vWK48-1aM3b4p9gMq3Bs";
-        String wechatName = "tom";
+        String nickname = "tom";
 
-        User user1 = new User(wechatUserId, null, null, null, 0);
+        User user1 = new User(wechatUserId, 0);
 
         userMapper.insert(user1);
         Assert.assertEquals(1, userMapper.findAll().size());
@@ -73,13 +73,13 @@ public class MybatisTests extends BaseDataBaseTest {
 
         User user3 = userMapper.findByWechatUserId(wechatUserId);
         Assert.assertNotNull(user3);
-        Assert.assertEquals(0, user3.getRegisterType());
+        Assert.assertEquals(0, user3.getRegisterType().intValue());
 
-        user3.setWechatName(wechatName);
+        user3.setNickname(nickname);
         userMapper.update(user3);
 
         User user4 = userMapper.findByWechatUserId(wechatUserId);
-        Assert.assertEquals(wechatName, user4.getWechatName());
+        Assert.assertEquals(nickname, user4.getNickname());
 
         userMapper.deleteById(user4.getId());
         Assert.assertEquals(0, userMapper.findAll().size());
@@ -188,5 +188,38 @@ public class MybatisTests extends BaseDataBaseTest {
 
         List<Answer> answerList3 = userAnswerMapper.findAnswerListByQuestionId(3);
         Assert.assertEquals(0, answerList3.size());
+    }
+
+    @Test
+    public void updateUser() {
+        String wechatUserId = "wechatUserId";
+        String nickname = "明明如月\uD83D\uDC0D";//with emoji
+        String city = "nanjing";
+        Integer type1 = 0;
+        Integer type2 = 1;
+
+        User user = new User(wechatUserId, type1);
+        user.setNickname(nickname);
+        userMapper.insert(user);
+        Assert.assertEquals(1, userMapper.findAll().size());
+
+        User foundUser = userMapper.findByWechatUserId(wechatUserId);
+        Assert.assertEquals(nickname, foundUser.getNickname());
+        Assert.assertNull(foundUser.getCity());
+
+        foundUser.setCity(city);
+        userMapper.updateUser(foundUser);
+
+        User foundUser2 = userMapper.findByWechatUserId(wechatUserId);
+        Assert.assertEquals(city, foundUser2.getCity());
+        Assert.assertEquals(nickname, foundUser2.getNickname());
+
+        User user2 = new User(wechatUserId, type2);
+        userMapper.updateUser(user2);
+
+        User foundUser3 = userMapper.findByWechatUserId(wechatUserId);
+        Assert.assertEquals(type2.intValue(), foundUser3.getRegisterType().intValue());
+        Assert.assertEquals(city, foundUser3.getCity());
+        Assert.assertEquals(nickname, foundUser3.getNickname());
     }
 }
