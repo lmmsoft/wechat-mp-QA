@@ -16,6 +16,8 @@ public class MsgServiceImpl implements MsgService {
 
     @Autowired
     private QAService qaService;
+    @Autowired
+    private OAuthService oAuthService;
 
     @Override
     public String handleWechatMessages(WxMpXmlMessage wxMessage) {
@@ -57,7 +59,7 @@ public class MsgServiceImpl implements MsgService {
         Enum.InsertAnswerResultType resultType = qaService.insertUserAnswer(user, userAnswer);
         switch (resultType) {
             case SucceedNoUserInfo:
-                return String.format("第%d题的答案已收到，点击链接 http://lmm333.com/ 报名参加抽奖", questionid);
+                return String.format("第%d题的答案已收到\n请点击链接： <a href=\"%s\">报名参加抽奖</a> ", questionid, oAuthService.getOauthUrl(wechatUserId));
             case Error:
                 return String.format("系统出错，请重试（questionId=%d,answerId=%d）", questionid, answerId);
             case Succeed:

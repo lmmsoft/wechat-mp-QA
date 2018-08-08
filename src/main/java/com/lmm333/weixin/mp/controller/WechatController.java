@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 public class WechatController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Qualifier("wxMpService")
     @Autowired
     private WxMpService wxService;
 
@@ -91,8 +93,7 @@ public class WechatController {
                 return "";
             }
 
-            out = outMessage
-                    .toEncryptedXml(this.wxService.getWxMpConfigStorage());
+            out = outMessage.toEncryptedXml(this.wxService.getWxMpConfigStorage());
         }
 
         this.logger.debug("\n组装回复信息：{}", out);

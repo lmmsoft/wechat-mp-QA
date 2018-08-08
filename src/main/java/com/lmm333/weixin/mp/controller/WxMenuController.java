@@ -1,6 +1,7 @@
 package com.lmm333.weixin.mp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +31,9 @@ import static me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 @RequestMapping("/wechat/menu")
 public class WxMenuController implements WxMpMenuService {
 
-  @Autowired
-  private WxMpService wxService;
+    @Qualifier("wxMpService")
+    @Autowired
+    private WxMpService wxService;
 
   /**
    * <pre>
