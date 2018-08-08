@@ -32,16 +32,8 @@ public class MsgHandler extends AbstractHandler {
         String content = null;
 
         if (wxMessage.getMsgType().equals(WxConsts.XmlMsgType.EVENT)) {
-            //TODO 可以选择将消息保存到本地
             //比如关注事件
-            switch (wxMessage.getEvent()) {
-                case WxConsts.EventType.SUBSCRIBE:
-                    content = "";
-                    break;
-                case WxConsts.EventType.UNSUBSCRIBE:
-                    content = "";
-                    break;
-            }
+            content = msgService.handleWechatEvent(wxMessage);
         } else {
             content = msgService.handleWechatMessages(wxMessage);
         }

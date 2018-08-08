@@ -1,7 +1,11 @@
-### 本Demo基于Spring Boot构建，实现微信公众号开发功能。
-### 本项目为weixin-java-tools的Demo演示程序，更多Demo请查阅：https://github.com/Wechat-Group/weixin-java-tools
+## 基于Spring Boot构建，实现微信公众号开发功能。
+- 本项目为weixin-java-tools的Demo演示程序
+- 原始SDK地址： https://github.com/Wechat-Group/weixin-java-tools
+- 支持单公众号demo 地址 https://github.com/binarywang/weixin-java-mp-demo-springboot
+- 支持多公众号demo 地址 https://github.com/binarywang/weixin-java-mp-multi-demo
+- 开放平台Demo 地址 https://github.com/Wechat-Group/weixin-java-open-demo
+- 更多Demo列表：https://github.com/Wechat-Group/weixin-java-tools/blob/master/demo.md
 
-[![Build Status](https://travis-ci.org/binarywang/weixin-java-mp-demo-springboot.svg?branch=master)](https://travis-ci.org/binarywang/weixin-java-mp-demo-springboot)
 -----------------------
 
 ## 使用步骤：
@@ -195,3 +199,14 @@ WxMpXmlMessage[
 2018-07-29 12:47:26.718 DEBUG 5415 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Null ModelAndView returned to DispatcherServlet with name 'dispatcherServlet': assuming HandlerAdapter completed request handling
 2018-07-29 12:47:26.718 DEBUG 5415 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Successfully completed request
 ```
+
+
+$.ajax({
+  url:jjj,
+  success:function(res){
+   $('#mark .red-img').attr("src",res.data.imgSrc);
+  },
+ })
+ 
+ 
+ https://github.com/vlily/shareDemo/blob/master/mobile/prize/prize.html

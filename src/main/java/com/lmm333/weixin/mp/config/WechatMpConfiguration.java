@@ -113,13 +113,13 @@ public class WechatMpConfiguration {
 
     // 关注事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(EventType.SUBSCRIBE).handler(this.getSubscribeHandler())
+            .event(EventType.SUBSCRIBE).handler(this.getMsgHandler())//拿不到用户信息，直接换成消息接口
         .end();
 
     // 取消关注事件
-    newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
+      newRouter.rule().async(false).msgType(XmlMsgType.EVENT)//拿不到用户信息，直接换成消息接口
         .event(EventType.UNSUBSCRIBE)
-        .handler(this.getUnsubscribeHandler()).end();
+              .handler(this.getMsgHandler()).end();
 
     // 上报地理位置事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)

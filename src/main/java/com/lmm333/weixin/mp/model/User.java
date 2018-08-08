@@ -6,7 +6,7 @@ public class User {
     private String wechatName;
     private String wechatImageUrl;
     private String userName;
-    private int registerType;//0没注册 1微信注册 2个人注册
+    private int registerType;//0已关注没注册 1微信注册 2个人注册 9已取关
 
     public User() {
     }

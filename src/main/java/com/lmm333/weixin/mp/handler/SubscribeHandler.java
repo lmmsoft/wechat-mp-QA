@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -23,13 +22,19 @@ public class SubscribeHandler extends AbstractHandler {
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
                                     Map<String, Object> context,
                                     WxMpService weixinService,
-                                    WxSessionManager sessionManager) throws WxErrorException {
+                                    WxSessionManager sessionManager) {
 
         this.logger.info("新关注用户 OPENID: " + wxMessage.getFromUser());
 
         // 获取微信用户基本信息
-        WxMpUser userWxInfo = weixinService.getUserService()
-                .userInfo(wxMessage.getFromUser(), null);
+        WxMpUser userWxInfo = null;
+        try {
+            userWxInfo = weixinService
+                    .getUserService()
+                    .userInfo(wxMessage.getFromUser(), null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (userWxInfo != null) {
             // TODO 可以添加关注用户到本地

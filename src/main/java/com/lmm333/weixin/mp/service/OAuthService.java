@@ -17,8 +17,11 @@ public class OAuthService {
 
     public String getOauthUrl(String userId) {
         String url = "http://www.gfitgo.com/lmm/";
-        String oauthUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, userId);
-        return oauthUrl;
+        return wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, userId);
+    }
+
+    public String getOauthUrlText(String userId) {
+        return String.format("请点击链接： <a href=\"%s\">报名参加抽奖</a> ", getOauthUrl(userId));
     }
 
     public WxMpOAuth2AccessToken getAccessToken(String code) {

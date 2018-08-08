@@ -50,6 +50,21 @@ class QAServiceImpl implements QAService {
     }
 
     @Override
+    public void updateUserRegisterType(User user) {
+        User foundUser = userMapper.findByWechatUserId(user.getWechatUserId());
+        if (foundUser == null) {
+            try {
+                userMapper.insert(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            foundUser.setRegisterType(user.getRegisterType());
+            userMapper.update(foundUser);
+        }
+    }
+
+    @Override
     public Enum.InsertAnswerResultType insertUserAnswer(User user, UserAnswer userAnswer) {
 
         Enum.InsertAnswerResultType resultType = Enum.InsertAnswerResultType.Succeed;

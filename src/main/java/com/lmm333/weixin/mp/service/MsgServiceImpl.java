@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
+import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 
 @Service
@@ -18,6 +19,27 @@ public class MsgServiceImpl implements MsgService {
     private QAService qaService;
     @Autowired
     private OAuthService oAuthService;
+
+    @Override
+    public String handleWechatEvent(WxMpXmlMessage wxMessage) {
+        String content = "谢谢！";
+
+        User user = new User();
+        user.setWechatUserId(wxMessage.getFromUser());
+
+        switch (wxMessage.getEvent()) {
+            case WxConsts.EventType.SUBSCRIBE:
+                content = String.format("感谢您的关注\n%s", oAuthService.getOauthUrlText(wxMessage.getFromUser()));
+                user.setRegisterType(0);
+                break;
+            case WxConsts.EventType.UNSUBSCRIBE:
+                user.setRegisterType(9);
+                break;
+        }
+        qaService.updateUserRegisterType(user);
+
+        return content;
+    }
 
     @Override
     public String handleWechatMessages(WxMpXmlMessage wxMessage) {
@@ -37,6 +59,10 @@ public class MsgServiceImpl implements MsgService {
             );
         }
         return content;
+    }
+
+    void updateUserRegisterType(User user) {
+        qaService.updateUserRegisterType(user);
     }
 
     String handleAnswer(String content, String wechatUserId, long createTime, int answerId) {
@@ -59,7 +85,7 @@ public class MsgServiceImpl implements MsgService {
         Enum.InsertAnswerResultType resultType = qaService.insertUserAnswer(user, userAnswer);
         switch (resultType) {
             case SucceedNoUserInfo:
-                return String.format("第%d题的答案已收到\n请点击链接： <a href=\"%s\">报名参加抽奖</a> ", questionid, oAuthService.getOauthUrl(wechatUserId));
+                return String.format("第%d题的答案已收到\n%s", questionid, oAuthService.getOauthUrlText(wechatUserId));
             case Error:
                 return String.format("系统出错，请重试（questionId=%d,answerId=%d）", questionid, answerId);
             case Succeed:
