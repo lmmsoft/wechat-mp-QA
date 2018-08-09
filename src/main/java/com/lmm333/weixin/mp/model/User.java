@@ -23,7 +23,7 @@ public class User {
     private String access_token;
     private String refresh_token;
     private String unionid;
-    private String openid;
+    private String openid;//different from wechatUserId because openid is for mp2 and wechatUserId is for mp1
     private String code;
 
     public User() {
