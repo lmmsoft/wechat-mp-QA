@@ -11,7 +11,7 @@ public interface QAService {
 
     //boolean init(List<Question> questionList);
 
-    void updateUserRegisterType(User user);
+    void replaceUserRegisterType(User user);
 
     Enum.InsertAnswerResultType insertUserAnswer(User user, UserAnswer userAnswer);
 

@@ -14,14 +14,13 @@ import java.util.List;
 
 public interface UserMapper {
 
-    @Insert("INSERT INTO t_user (wechatUserId, nickname, headimgurl, userName, registerType)" +
-            " VALUES( #{wechatUserId}, #{nickname}, #{headimgurl}, #{userName}, #{registerType} )")
+    @Insert("INSERT INTO t_user (wechatUserId, registerType, nickname, headimgurl, userName)" +
+            " VALUES( #{wechatUserId}, #{registerType}, #{nickname}, #{headimgurl}, #{userName} )")
     void insert(User user);
 
-    @Update("UPDATE t_user" +
-            " SET nickname = #{nickname}, headimgurl = #{headimgurl}, userName = #{userName}, registerType = #{registerType}" +
-            " WHERE wechatUserId = #{wechatUserId}")
-    void update(User user);
+    @Update("REPLACE INTO t_user (wechatUserId, registerType)" +
+            " VALUES( #{wechatUserId}, #{registerType} )")
+    void replaceUserRegisterTypeByWechatUserId(User user);
 
     @Delete("DELETE FROM t_user" +
             " WHERE id = #{id}")
@@ -49,9 +48,7 @@ public interface UserMapper {
             return new SQL() {{
                 UPDATE("t_user");
 
-                if (user.getRegisterType() != null) {
-                    SET("registerType = #{registerType}");
-                }
+                SET("registerType = #{registerType}");
 
                 if (user.getWechatUserId() != null) {
                     SET("wechatUserId = #{wechatUserId}");

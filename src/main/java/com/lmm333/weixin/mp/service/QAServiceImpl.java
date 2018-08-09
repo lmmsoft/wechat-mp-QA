@@ -50,18 +50,8 @@ class QAServiceImpl implements QAService {
     }
 
     @Override
-    public void updateUserRegisterType(User user) {
-        User foundUser = userMapper.findByWechatUserId(user.getWechatUserId());
-        if (foundUser == null) {
-            try {
-                userMapper.insert(user);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            foundUser.setRegisterType(user.getRegisterType());
-            userMapper.update(foundUser);
-        }
+    public void replaceUserRegisterType(User user) {
+        userMapper.replaceUserRegisterTypeByWechatUserId(user);
     }
 
     @Override

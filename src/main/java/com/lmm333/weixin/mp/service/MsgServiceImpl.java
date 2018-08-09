@@ -24,19 +24,18 @@ public class MsgServiceImpl implements MsgService {
     public String handleWechatEvent(WxMpXmlMessage wxMessage) {
         String content = "谢谢！";
 
-        User user = new User();
-        user.setWechatUserId(wxMessage.getFromUser());
+        User user = new User(wxMessage.getFromUser(), User.TYPE_SUBSCRIBED);
 
         switch (wxMessage.getEvent()) {
             case WxConsts.EventType.SUBSCRIBE:
                 content = String.format("感谢您的关注\n%s", oAuthService.getOauthUrlText(wxMessage.getFromUser()));
-                user.setRegisterType(0);
+                user.setRegisterType(User.TYPE_SUBSCRIBED);
                 break;
             case WxConsts.EventType.UNSUBSCRIBE:
-                user.setRegisterType(9);
+                user.setRegisterType(User.TYPE_UNSUBSCRIBED);
                 break;
         }
-        qaService.updateUserRegisterType(user);
+        qaService.replaceUserRegisterType(user);
 
         return content;
     }
@@ -62,7 +61,7 @@ public class MsgServiceImpl implements MsgService {
     }
 
     void updateUserRegisterType(User user) {
-        qaService.updateUserRegisterType(user);
+        qaService.replaceUserRegisterType(user);
     }
 
     String handleAnswer(String content, String wechatUserId, long createTime, int answerId) {
@@ -73,8 +72,7 @@ public class MsgServiceImpl implements MsgService {
             return "数据输入错误，请重新输入：" + content.trim();
         }
 
-        User user = new User();
-        user.setWechatUserId(wechatUserId);
+        User user = new User(wechatUserId, User.TYPE_SUBSCRIBED);
 
         UserAnswer userAnswer = new UserAnswer(
                 wechatUserId,

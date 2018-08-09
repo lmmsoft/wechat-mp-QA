@@ -43,18 +43,22 @@ public class MsgServiceTest extends BaseDataBaseTest {
         Assert.assertEquals("系统出错，请重试（questionId=1,answerId=11）", msgService.handleWechatMessages(message));
 
         message.setFromUser("aa");
-        Assert.assertEquals("第1题的答案已收到，点击链接 http://lmm333.com/ 报名参加抽奖", msgService.handleWechatMessages(message));
+        Assert.assertTrue(msgService.handleWechatMessages(message).startsWith("第1题的答案已收到"));
     }
 
     @Test
     public void handleAnswer() {
-        Assert.assertEquals("第1题的答案已收到，点击链接 http://lmm333.com/ 报名参加抽奖",
-                msgService.handleAnswer(
-                        "content",
-                        "fromUser",
-                        System.currentTimeMillis() / 1000L, 11));
+        String wechatuserId = "fromUser";
+        String content = msgService.handleAnswer(
+                "content",
+                wechatuserId,
+                System.currentTimeMillis() / 1000L, 11);
+        Assert.assertTrue(content.startsWith("第1题的答案已收到"));
+        Assert.assertTrue(content.indexOf("报名参加抽奖") > 0);
 
-        userMapper.update(new User("fromUser", 1));
+        userMapper.replaceUserRegisterTypeByWechatUserId(new User(wechatuserId, User.TYPE_WECHAT_OAUTHED));
+        Assert.assertEquals(User.TYPE_WECHAT_OAUTHED, userMapper.findByWechatUserId(wechatuserId).getRegisterType());
+
         Assert.assertEquals("第1题的答案已收到，愿您中奖~！",
                 msgService.handleAnswer(
                         "content",

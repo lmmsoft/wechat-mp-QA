@@ -73,10 +73,10 @@ public class MybatisTests extends BaseDataBaseTest {
 
         User user3 = userMapper.findByWechatUserId(wechatUserId);
         Assert.assertNotNull(user3);
-        Assert.assertEquals(0, user3.getRegisterType().intValue());
+        Assert.assertEquals(0, user3.getRegisterType());
 
         user3.setNickname(nickname);
-        userMapper.update(user3);
+        userMapper.updateUser(user3);
 
         User user4 = userMapper.findByWechatUserId(wechatUserId);
         Assert.assertEquals(nickname, user4.getNickname());
@@ -195,8 +195,8 @@ public class MybatisTests extends BaseDataBaseTest {
         String wechatUserId = "wechatUserId";
         String nickname = "明明如月\uD83D\uDC0D";//with emoji
         String city = "nanjing";
-        Integer type1 = 0;
-        Integer type2 = 1;
+        int type1 = 0;
+        int type2 = 1;
 
         User user = new User(wechatUserId, type1);
         user.setNickname(nickname);
@@ -218,8 +218,17 @@ public class MybatisTests extends BaseDataBaseTest {
         userMapper.updateUser(user2);
 
         User foundUser3 = userMapper.findByWechatUserId(wechatUserId);
-        Assert.assertEquals(type2.intValue(), foundUser3.getRegisterType().intValue());
+        Assert.assertEquals(type2, foundUser3.getRegisterType());
         Assert.assertEquals(city, foundUser3.getCity());
         Assert.assertEquals(nickname, foundUser3.getNickname());
+
+        //Test not set type will reset type to default(0)
+        User nullTypeUser = new User();
+        nullTypeUser.setWechatUserId(wechatUserId);
+        nullTypeUser.setCountry(city);
+        userMapper.updateUser(nullTypeUser);
+
+        User foundNullTypeUser = userMapper.findByWechatUserId(wechatUserId);
+        Assert.assertEquals(type1, foundNullTypeUser.getRegisterType());
     }
 }
