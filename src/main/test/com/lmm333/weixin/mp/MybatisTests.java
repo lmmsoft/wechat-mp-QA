@@ -231,4 +231,39 @@ public class MybatisTests extends BaseDataBaseTest {
         User foundNullTypeUser = userMapper.findByWechatUserId(wechatUserId);
         Assert.assertEquals(type1, foundNullTypeUser.getRegisterType());
     }
+
+    @Test
+    public void updateUserStepByStep() {
+        String state = "user-test-updateUserStepByStep";
+        String code = "responseCode";
+
+        User user = new User(state, User.TYPE_WECHAT_OAUTHED)
+                .setCode(code);
+        userMapper.replaceUserRegisterTypeByWechatUserId(user);
+        Assert.assertEquals(1, userMapper.findAll().size());
+
+        //Step 2: get and save token info
+        user.setAccess_token("Access_token")
+                .setRefresh_token("RefreshToken")
+                .setUnionid("UnionId")
+                .setOpenid("OpenId");
+        userMapper.updateUser(user);
+        Assert.assertEquals(1, userMapper.findAll().size());
+
+        //Step3: get and save user info
+        user.setNickname("Nickname")
+                .setHeadimgurl("HeadImgUrl")
+                .setSex("Sex")
+                .setLanguage("Language")
+                .setCity("City")
+                .setProvince("Province")
+                .setCountry("Country");
+        userMapper.updateUser(user);
+
+        Assert.assertEquals(1, userMapper.findAll().size());
+
+        User foundUser = userMapper.findByWechatUserId(state);
+        Assert.assertEquals(code, foundUser.getCode());
+        Assert.assertEquals(User.TYPE_WECHAT_OAUTHED, foundUser.getRegisterType());
+    }
 }

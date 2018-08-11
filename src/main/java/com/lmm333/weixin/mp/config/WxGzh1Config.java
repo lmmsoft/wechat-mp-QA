@@ -15,6 +15,8 @@ public class WxGzh1Config extends WxConfig {
     @Value("${wx_appsecret}")
     private String appsecret;
 
+    @Value("${wx_oauth_callback_url}")
+    private String oauthCallbackUrl;
 
     @Override
     public String getToken() {
@@ -41,4 +43,7 @@ public class WxGzh1Config extends WxConfig {
         return WxAccountEnum.GZH1;
     }
 
+    public String getOauthCallbackUrl() {
+        return oauthCallbackUrl;
+    }
 }

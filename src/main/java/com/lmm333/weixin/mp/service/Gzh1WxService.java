@@ -19,4 +19,8 @@ public class Gzh1WxService extends BaseWxService {
     protected WxConfig getServerConfig() {
         return this.wxConfig;
     }
+
+    public String getOauthCallbackUrl() {
+        return wxConfig.getOauthCallbackUrl();
+    }
 }
