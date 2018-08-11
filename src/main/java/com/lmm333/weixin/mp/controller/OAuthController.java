@@ -27,12 +27,19 @@ public class OAuthController {
     public String oAuthLandingPage(@RequestParam(value = "code", required = false) String code,
                                    @RequestParam(value = "state", required = false) String state) {
         if (code == null || state == null) {
-            return "授权请点击: <a href='" + oAuthService.getOauthUrl("") + "'>go</a>";
+            return "报名请点击: <a href='" + oAuthService.getOauthUrl("") + "'>go</a>";
         }
 
-        WxMpUser wxMpUser = oAuthService.getWxMpUser(code, state);
+        String message;
+        try {
+            WxMpUser wxMpUser = oAuthService.getWxMpUser(code, state);
+            message = wxMpUser.getNickname() + "恭喜你，抽奖注册成功~~~!\n您现在可以关闭网页，直接在公众号页面发送祝福并参与抽奖~";
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "报名出错，请求联系管理员，错误信息:\n " + e.getMessage();
+        }
 
         //return page to user
-        return wxMpUser.getNickname() + "恭喜你，抽奖注册成功~~~!\n您现在可以关闭网页，直接在公众号页面发送祝福并参与抽奖~";
+        return message;
     }
 }
