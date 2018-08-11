@@ -22,10 +22,14 @@ public class OAuthController {
         return "<a href='" + oAuthService.getOauthUrl("") + "'>go</a>";
     }
 
+    @GetMapping("/")
     @ResponseBody
-    public String oAuthLandingPage(@RequestParam("code") String code,
-                                   @RequestParam("state") String state) {
-        //TODO 如果注册失败，显示错误页面
+    public String oAuthLandingPage(@RequestParam(value = "code", required = false) String code,
+                                   @RequestParam(value = "state", required = false) String state) {
+        if (code == null || state == null) {
+            return "授权请点击: <a href='" + oAuthService.getOauthUrl("") + "'>go</a>";
+        }
+
         WxMpUser wxMpUser = oAuthService.getWxMpUser(code, state);
 
         //return page to user
