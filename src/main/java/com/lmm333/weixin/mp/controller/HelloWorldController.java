@@ -16,11 +16,11 @@ class HelloWorldController {
         return new HelloWorldModel(1, "myname", 80.88f);
     }
 
-    @RequestMapping("/hello2")
-    public String hello2(ModelMap map) {
+    @RequestMapping("/version")
+    public String version(ModelMap map) {
         // 加入一个属性，用来在模板中读取
-        map.addAttribute("host", "http://lmm333.com");
-        // return模板文件的名称，对应src/main/resources/templates/index.html
+        map.addAttribute("version", "version 0.3");
+        // return模板文件的名称，对应src/main/resources/templates/hello.html
         return "hello";
     }
 }
