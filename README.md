@@ -1,5 +1,5 @@
 ## 基于Spring Boot构建，实现微信公众号开发功能。
-- 本项目为weixin-java-tools的Demo演示程序
+- 本项目基于weixin-java-tools的Demo演示程序迭代改写
 - 原始SDK地址： https://github.com/Wechat-Group/weixin-java-tools
 - 支持单公众号demo 地址 https://github.com/binarywang/weixin-java-mp-demo-springboot
 - 支持多公众号demo 地址 https://github.com/binarywang/weixin-java-mp-multi-demo
@@ -25,20 +25,19 @@
 1. 第一次使用，如果在加解密的过程中出现java.security.InvalidKeyException: Illegal key size，请参阅 [Link](https://github.com/Wechat-Group/weixin-java-tools/wiki/%E5%8A%A0%E8%A7%A3%E5%AF%86%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95)
 
 ## 数据持久化
+### 1. redis (已弃用)
 1. springboot redis [doc](https://docs.spring.io/spring-data/redis/docs/current/reference/html/#get-started)
-
-## redis in docker
-1. docker 安装：
-```
+1. redis in docker 安装：
+    ```
     docker pull redis # 下载redis镜像
     docker run -p 6379:6379 --name redis redis:latest # 运行容器， 将容器的6379端口映射到主机的6379端口
     docker ps # 列出容器列表
     docker exec -it 43f7a65ec7f8 redis-cli # 运行redis-cli
     docker exec -it 81 redis-benchmark -n 100000 -q # 同时执行10万个请求测试性能
-```
+    ```
 
-## mysql in docker
-1. docker 安装：
+### 2. MySQL
+3. mysql in docker安装：
     ```
     docker search mysql
     docker pull mysql
@@ -48,19 +47,19 @@
     docker run -p 3406:3306 --name mymysql -e MYSQL_ROOT_PASSWORD=mypassword -d mysql
     ```
 
-2. [Link to Docker Hub](https://hub.docker.com/_/mysql/)
+2. [Link to MySQL Docker Hub](https://hub.docker.com/_/mysql/)
 2. Meet error: Unable to load authentication plugin 'caching_sha2_password', then use
     ```
     docker exec -it CONTAINER_ID bash
     mysql --user=root --password=123456    
     ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY '123456';
     ```
-3. 还是不行，改安装mysql 5.7
+3. MySQL8遇到密码安全性问题，改安装mysql 5.7
     ```
     $ docker pull mysql:5.7
     $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -d mysql:5.7
-    
     ```
+1. MySQL emoji存储问题，数据库编码设置utf8mb4，修改连接字符串，详见相关commit
 ## 需求列表
 
 - 自动反馈

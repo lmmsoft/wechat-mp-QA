@@ -14,10 +14,14 @@ public class ResultController {
     @Autowired
     QAService qaService;
 
-
     @ResponseBody
     @RequestMapping(value = "result/{questionId}")
     public Result userAnswerRequest(@PathVariable int questionId) {
         return qaService.findResultFromQuestionId(questionId);
+    }
+
+    @RequestMapping("prize")
+    public String prize() {
+        return "prize";
     }
 }
