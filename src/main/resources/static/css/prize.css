@@ -61,7 +61,6 @@ body {
 .logo {
     height: 2.64493rem;
     text-align: center;
-    background: url(/Application/Public/img/zhuanpan/logo2.png) no-repeat 0.25362rem 0.18116rem;
     background-size: 1.19565rem 0.43478rem;
 }
 
@@ -118,7 +117,6 @@ body {
     width: 5.14493rem;
     margin: 0 auto;
     position: relative;
-    background: url(/Application/Public/img/zhuanpan/bg-prize.png) center 0 no-repeat;
     background-size: 5.14493rem 5.14493rem;
 }
 
@@ -184,16 +182,15 @@ body {
 }
 
 .rule-prize ul {
-    height: 0.97826rem;
+    height: 1rem;
     overflow: hidden;
     padding-left: 1.08696rem;
-    background: url(/Application/Public/img/zhuanpan/ruler-prize.png) no-repeat;
     background-size: 0.97826rem;
     /*display: inline-block;*/
 }
 
 .rule-prize li {
-    height: 0.25362rem;
+    height: 0.25rem;
     color: #262623;
     font-size: 0.25362rem;
     /*display: inline-block;*/
@@ -201,13 +198,6 @@ body {
 
 .rule-prize li:nth-child(2) {
     margin: 0.05435rem 0;
-}
-
-.rule-prize p {
-    color: #fff;
-    text-align: center;
-    font-size: 0.21739rem;
-    margin-top: 0.18116rem;
 }
 
 /*prize over*/

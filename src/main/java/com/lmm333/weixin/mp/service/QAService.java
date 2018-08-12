@@ -1,9 +1,12 @@
 package com.lmm333.weixin.mp.service;
 
 import com.lmm333.weixin.mp.model.Enum;
+import com.lmm333.weixin.mp.model.Question;
 import com.lmm333.weixin.mp.model.Result;
 import com.lmm333.weixin.mp.model.User;
 import com.lmm333.weixin.mp.model.UserAnswer;
+
+import java.util.List;
 
 public interface QAService {
     int RESULE_SUCCEED = 0;
@@ -18,4 +21,6 @@ public interface QAService {
     int findQuestionIdFromAnswerId(int answerId);
 
     Result findResultFromQuestionId(int questionId);
+
+    List<Question> getQA();
 }
