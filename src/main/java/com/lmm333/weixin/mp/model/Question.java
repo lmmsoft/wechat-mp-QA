@@ -3,19 +3,19 @@ package com.lmm333.weixin.mp.model;
 import java.util.List;
 
 public class Question {
-    int questionId;
-    String questionTitle;//第一题
-    String questionType;//送分题
-    String questionDescription;//新郎叫什么名字
+    private int questionId;
+    private String questionTitle;//第一题
+    private String questionType;//送分题
+    private String answerDescription;//新郎叫什么名字
 
-    int rightAnswerIndex;
-    List<Answer2> answerList;
+    private int rightAnswerIndex;
+    private List<Answer2> answerList;
 
-    public Question(int questionId, String questionTitle, String questionType, String questionDescription, int rightAnswerIndex, List<Answer2> answerList) {
+    public Question(int questionId, String questionType, String questionTitle, String answerDescription, int rightAnswerIndex, List<Answer2> answerList) {
         this.questionId = questionId;
         this.questionTitle = questionTitle;
         this.questionType = questionType;
-        this.questionDescription = questionDescription;
+        this.answerDescription = answerDescription;
         this.rightAnswerIndex = rightAnswerIndex;
         this.answerList = answerList;
     }
@@ -47,12 +47,12 @@ public class Question {
         return this;
     }
 
-    public String getQuestionDescription() {
-        return questionDescription;
+    public String getAnswerDescription() {
+        return answerDescription;
     }
 
-    public Question setQuestionDescription(String questionDescription) {
-        this.questionDescription = questionDescription;
+    public Question setAnswerDescription(String answerDescription) {
+        this.answerDescription = answerDescription;
         return this;
     }
 
