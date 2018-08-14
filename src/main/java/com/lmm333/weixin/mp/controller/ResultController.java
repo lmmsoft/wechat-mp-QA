@@ -6,6 +6,7 @@ import com.lmm333.weixin.mp.service.QAService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,5 +33,26 @@ public class ResultController {
     @RequestMapping("questions")
     public List<Question> getQA() {
         return qaService.getQA();
+    }
+
+    @RequestMapping("question/{questionId}")
+    public String getQuestion(@PathVariable int questionId, Model model) {
+        if (questionId >= 1 && questionId <= 10) {
+            //题目答案
+            Result result = qaService.findResultFromQuestionId(questionId);
+            List<Question> questions = qaService.getQA();
+
+            model.addAttribute("questionId", questionId - 1);// input 1 -> output 0
+            model.addAttribute(result);
+            model.addAttribute("q", questions);
+
+            return "question";
+        } else if (questionId == 12) {
+            //最多
+            return "";
+        } else {
+            //统计页
+            return "";
+        }
     }
 }

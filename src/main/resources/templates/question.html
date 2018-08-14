@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>结果页</title>
+</head>
+<body>
+<div class="page">
+    <div class="result-list">
+        <h2 th:text="${q.get(questionId).questionTitle}"></h2>
+        <ul>
+            <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(0).answerDescription}  : ${result.answerList.get(0).userCount}人|"></li>
+            <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(1).answerDescription}  : ${result.answerList.get(1).userCount}人|"></li>
+            <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(2).answerDescription}  : ${result.answerList.get(2).userCount}人|"></li>
+            <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(3).answerDescription}  : ${result.answerList.get(3).userCount}人|"></li>
+        </ul>
+    </div>
+
+    <div class="user-list">
+        <h3 th:text="|答对的用户${result.userList.size()}人, 他们是|">答对的用户x人}</h3>
+        <ul>
+            <li th:each="user : ${result.userList}">
+                <span th:text="${user.nickname}">lmm333</span>
+                <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132"
+                     th:src="${user.headimgurl}"/>
+            </li>
+        </ul>
+        <p class="date"><span th:text="${#dates.createNow()}">2015年2月3日</span></p>
+    </div>
+</div>
+</body>
+</html>
