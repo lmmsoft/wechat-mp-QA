@@ -5,6 +5,10 @@
 </head>
 
 <body>
-<h1 th:text="${message}">Hello World</h1>
+
+<a th:href="${url}" th:text="${message1}" th:if="${message1 !=null}">Go</a>
+
+<p th:text="${message2}" th:if="${message2 !=null}">Hello World</p>
+
 </body>
 </html>

@@ -42,8 +42,11 @@ public class OAuthController {
             @RequestParam(value = "code", required = false) String code,
             @RequestParam(value = "state", required = false) String state,
             Model model) {
+
         if (code == null || state == null) {
-            return "报名请点击: <a href='" + oAuthService.getOauthUrl("") + "'>go</a>";
+            model.addAttribute("message1", "请点击报名");
+            model.addAttribute("url", oAuthService.getOauthUrl(""));
+            return "oauthfinish";
         }
 
         String message;
@@ -54,7 +57,7 @@ public class OAuthController {
             e.printStackTrace();
             message = "报名出错，请联系管理员，错误信息:\n " + e.getMessage();
         }
-        model.addAttribute("message", message);
+        model.addAttribute("message2", message);
 
         //return page to user
         return "oauthfinish";
