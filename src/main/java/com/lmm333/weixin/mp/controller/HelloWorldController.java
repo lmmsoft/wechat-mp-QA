@@ -19,7 +19,7 @@ class HelloWorldController {
     @RequestMapping("/version")
     public String version(ModelMap map) {
         // 加入一个属性，用来在模板中读取
-        map.addAttribute("version", "version 0.3");
+        map.addAttribute("version", "version 0.5");
         // return模板文件的名称，对应src/main/resources/templates/hello.html
         return "hello";
     }

@@ -4,6 +4,7 @@ import com.lmm333.weixin.mp.service.OAuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,21 +24,24 @@ public class OAuthController {
     }
 
     @GetMapping("/")
-    @ResponseBody
     public String oAuthLandingPage(@RequestParam(value = "code", required = false) String code,
-                                   @RequestParam(value = "state", required = false) String state) {
-        return handleOauthRequest(code, state);
+                                   @RequestParam(value = "state", required = false) String state,
+                                   Model model) {
+        return handleOauthRequest(code, state, model);
     }
 
 
     @GetMapping("/oauth")
-    @ResponseBody
     public String oAuthLandingPage2(@RequestParam(value = "code", required = false) String code,
-                                    @RequestParam(value = "state", required = false) String state) {
-        return handleOauthRequest(code, state);
+                                    @RequestParam(value = "state", required = false) String state,
+                                    Model model) {
+        return handleOauthRequest(code, state, model);
     }
 
-    private String handleOauthRequest(@RequestParam(value = "code", required = false) String code, @RequestParam(value = "state", required = false) String state) {
+    private String handleOauthRequest(
+            @RequestParam(value = "code", required = false) String code,
+            @RequestParam(value = "state", required = false) String state,
+            Model model) {
         if (code == null || state == null) {
             return "报名请点击: <a href='" + oAuthService.getOauthUrl("") + "'>go</a>";
         }
@@ -45,13 +49,14 @@ public class OAuthController {
         String message;
         try {
             WxMpUser wxMpUser = oAuthService.getWxMpUser(code, state);
-            message = wxMpUser.getNickname() + "恭喜你，抽奖注册成功~~~!\n您现在可以关闭网页，直接在公众号里发送祝福并参与抽奖~";
+            message = wxMpUser.getNickname() + "恭喜，报名成功~~~!\n您现在可以关闭网页，直接在公众号文本框里发送答案参与抽奖~";
         } catch (Exception e) {
             e.printStackTrace();
             message = "报名出错，请联系管理员，错误信息:\n " + e.getMessage();
         }
+        model.addAttribute("message", message);
 
         //return page to user
-        return message;
+        return "oauthfinish";
     }
 }
