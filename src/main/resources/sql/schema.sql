@@ -39,6 +39,7 @@ CREATE TABLE t_user_answer (
   wechatUserId    VARCHAR(255) NOT NULL,
   questionId      INT          NOT NULL,
   userAnswerIndex int          NOT NULL,
+  isright         int          NOT NULL,
   updateTime      DATETIME     NOT NULL             DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY `wechatUserId` (`wechatUserId`, `questionId`)
 )

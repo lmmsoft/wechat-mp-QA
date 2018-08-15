@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>答对最多题目排行</title>
+    <style type="text/css">
+        .list-ul img {
+            width: 100px;
+        }
+
+        .list-ul {
+            display: inline-block; /*border:1px solid red;*/
+            width: 90%;
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .list-ul li {
+            display: inline-block;
+            width: 120px;
+        }
+
+        .pageItem {
+            float: left;
+            width: 40%;
+            border: 1px solid red;
+        }
+
+        .mark {
+            position: relative;
+        }
+
+        .mark-content {
+            width: 60%;
+            height: 50%;
+            background: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .prize-id, .prize-prize, .prize-user, .prize-image {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div class="user-list">
+        <h3>答对最多题目排名前十</h3>
+        <ul class="list-ul">
+            <li th:each="user : ${result}">
+                <span th:text="|${user.rightcount}题|">X题</span>
+                <span th:text="${user.nickname}">lmm333</span>
+                <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132"
+                     th:src="${user.headimgurl}"/>
+            </li>
+        </ul>
+        <p class="date"><span th:text="${#dates.createNow()}">2015年2月3日</span></p>
+    </div>
+</div>
+</body>
+</html>

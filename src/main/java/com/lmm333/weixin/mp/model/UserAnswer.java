@@ -8,6 +8,7 @@ public class UserAnswer {
     private String wechatUserId;
     private int questionId;
     private int userAnswerIndex;
+    private int isright;
     private Timestamp updateTime;
 
     public UserAnswer() {
@@ -53,6 +54,15 @@ public class UserAnswer {
 
     public UserAnswer setUserAnswerIndex(int userAnswerIndex) {
         this.userAnswerIndex = userAnswerIndex;
+        return this;
+    }
+
+    public int getIsright() {
+        return isright;
+    }
+
+    public UserAnswer setIsright(int isright) {
+        this.isright = isright;
         return this;
     }
 

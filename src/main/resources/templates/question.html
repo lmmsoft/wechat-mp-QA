@@ -58,7 +58,7 @@
     </div>
 
     <div class="pageItem left">
-        <div class="result-list">
+        <div class="result-list" th:if="${show_result_list}">
             <h2 th:text="${q.get(questionId).questionTitle}"></h2>
             <ul>
                 <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(0).answerDescription}  : ${result.answerList.get(0).userCount}人|"></li>

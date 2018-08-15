@@ -9,6 +9,7 @@ import com.lmm333.weixin.mp.model.Question;
 import com.lmm333.weixin.mp.model.Result;
 import com.lmm333.weixin.mp.model.User;
 import com.lmm333.weixin.mp.model.UserAnswer;
+import com.lmm333.weixin.mp.model.UserRightAnswer;
 
 import org.springframework.stereotype.Service;
 
@@ -177,7 +178,7 @@ class QAServiceImpl implements QAService {
     );
     private Map<Integer, Integer> answerQuestionMap = new HashMap<>();//<AnswerId, QuestionId>
     private Map<Integer, List<Integer>> questionAnswerMap = new HashMap<>();//<QuestionId, AnswerId-List>
-    private Map<Integer, Integer> questionRightAnswerMap = new HashMap<>();//<QuestionId, QuestionId>
+    private Map<Integer, Integer> questionRightAnswerMap = new HashMap<>();//<QuestionId, AnswerId>
 
 
     public QAServiceImpl() {
@@ -208,6 +209,14 @@ class QAServiceImpl implements QAService {
 
         if (foundUser.getRegisterType() == 0) {
             resultType = Enum.InsertAnswerResultType.SucceedNoUserInfo;
+        }
+
+        // Check if right answer
+        int rightAnswerId = questionRightAnswerMap.getOrDefault(userAnswer.getQuestionId(), -1);
+        if (rightAnswerId == userAnswer.getUserAnswerIndex()) {
+            userAnswer.setIsright(1);
+        } else {
+            userAnswer.setIsright(0);
         }
 
         // Handle userAnswer
@@ -272,6 +281,16 @@ class QAServiceImpl implements QAService {
     @Override
     public List<String> getPrize() {
         return prizeList;
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return userMapper.findAll();
+    }
+
+    @Override
+    public List<UserRightAnswer> findUserRightAnswerList() {
+        return userAnswerMapper.findUserRightAnswerList();
     }
 
     private void initQuestionList() {

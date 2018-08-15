@@ -5,6 +5,7 @@ import com.lmm333.weixin.mp.model.Question;
 import com.lmm333.weixin.mp.model.Result;
 import com.lmm333.weixin.mp.model.User;
 import com.lmm333.weixin.mp.model.UserAnswer;
+import com.lmm333.weixin.mp.model.UserRightAnswer;
 
 import java.util.List;
 
@@ -25,4 +26,8 @@ public interface QAService {
     List<Question> getQA();
 
     List<String> getPrize();
+
+    List<User> getAllUser();
+
+    List<UserRightAnswer> findUserRightAnswerList();
 }

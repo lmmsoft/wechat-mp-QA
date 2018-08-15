@@ -3,6 +3,7 @@ package com.lmm333.weixin.mp.dao;
 import com.lmm333.weixin.mp.model.Answer;
 import com.lmm333.weixin.mp.model.User;
 import com.lmm333.weixin.mp.model.UserAnswer;
+import com.lmm333.weixin.mp.model.UserRightAnswer;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -14,16 +15,16 @@ import java.util.List;
 
 public interface UserAnswerMapper {
 
-    @Insert("INSERT INTO t_user_answer(wechatUserId, questionId, userAnswerIndex, updateTime)" +
-            " VALUES( #{wechatUserId}, #{questionId}, #{userAnswerIndex}, #{updateTime} )")
+    @Insert("INSERT INTO t_user_answer(wechatUserId, questionId, userAnswerIndex, isright, updateTime)" +
+            " VALUES( #{wechatUserId}, #{questionId}, #{userAnswerIndex}, #{isright}, #{updateTime} )")
     void insert(UserAnswer userAnswer);
 
-    @Insert("REPLACE INTO t_user_answer(wechatUserId, questionId, userAnswerIndex, updateTime)" +
-            " VALUES( #{wechatUserId}, #{questionId}, #{userAnswerIndex}, #{updateTime} )")
+    @Insert("REPLACE INTO t_user_answer(wechatUserId, questionId, userAnswerIndex, isright, updateTime)" +
+            " VALUES( #{wechatUserId}, #{questionId}, #{userAnswerIndex}, #{isright}, #{updateTime} )")
     boolean replace(UserAnswer userAnswer);
 
     @Update("UPDATE t_user_answer" +
-            " SET questionId = #{questionId}, userAnswerIndex = #{userAnswerIndex}, updateTime = #{updateTime}" +
+            " SET questionId = #{questionId}, userAnswerIndex = #{userAnswerIndex}, isright = #{isright}, updateTime = #{updateTime}" +
             " WHERE wechatUserId = #{wechatUserId}")
     void update(UserAnswer userAnswer);
 
@@ -64,4 +65,12 @@ public interface UserAnswerMapper {
             " WHERE questionId = #{questionId} " +
             " GROUP BY userAnswerIndex")
     List<Answer> findAnswerListByQuestionId(@Param("questionId") int questionId);
+
+    @Select("SELECT t_user.wechatUserId, nickname, headimgurl, count(*) AS rightcount" +
+            " FROM t_user, t_user_answer " +
+            " WHERE t_user.wechatUserId = t_user_answer.wechatUserId AND t_user_answer.isright = 1 " +
+            " GROUP BY wechatUserId " +
+            " ORDER BY rightcount DESC " +
+            " LIMIT 10")
+    List<UserRightAnswer> findUserRightAnswerList();
 }

@@ -4,6 +4,7 @@ import com.lmm333.weixin.mp.model.Answer;
 import com.lmm333.weixin.mp.model.Question;
 import com.lmm333.weixin.mp.model.Result;
 import com.lmm333.weixin.mp.model.User;
+import com.lmm333.weixin.mp.model.UserRightAnswer;
 import com.lmm333.weixin.mp.service.QAService;
 
 import org.apache.http.util.TextUtils;
@@ -48,21 +49,15 @@ public class ResultController {
             Result result = qaService.findResultFromQuestionId(questionId);
             List<Question> questions = qaService.getQA();
 
-            List<User> registeredUserList = new ArrayList<>();
-            for (User user : result.userList) {
-                if (!TextUtils.isEmpty(user.getNickname()) && !TextUtils.isEmpty(user.getHeadimgurl())) {
-                    registeredUserList.add(user);
-                }
-            }
-
+            List<User> validUserList = findValidUsers(result.userList);
 
             String prize_user = "【没有有效用户】";
             String prize_image = "http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132";
 
-            if (registeredUserList.size() != 0) {
-                int rand = new Random().nextInt(registeredUserList.size());
-                prize_user = registeredUserList.get(rand).getNickname();
-                prize_image = registeredUserList.get(rand).getHeadimgurl();
+            if (validUserList.size() != 0) {
+                int rand = new Random().nextInt(validUserList.size());
+                prize_user = validUserList.get(rand).getNickname();
+                prize_image = validUserList.get(rand).getHeadimgurl();
             }
 
 
@@ -74,6 +69,7 @@ public class ResultController {
                 userinfo = String.format("没人答对, 所有答题的%d人都可以参与抽奖:", result.userList.size());
             }
 
+            model.addAttribute("show_result_list", true);
             model.addAttribute("userinfo", userinfo);
             model.addAttribute("questionId", questionId - 1);// input 1 -> output 0
             model.addAttribute(result);
@@ -86,12 +82,47 @@ public class ResultController {
 
             return "question";
         } else if (questionId == 12) {
-            //最多
-            return "";
+
+            List<UserRightAnswer> result = qaService.findUserRightAnswerList();
+            model.addAttribute("result", result);
+
+            return "questionright";
         } else {
-            //统计页
-            return "";
+            //统计页11
+            model.addAttribute("show_result_list", false);
+
+            List<User> validUserList = findValidUsers(qaService.getAllUser());
+            String prize_user = "【没有有效用户】";
+            String prize_image = "http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132";
+
+            if (validUserList.size() != 0) {
+                int rand = new Random().nextInt(validUserList.size());
+                prize_user = validUserList.get(rand).getNickname();
+                prize_image = validUserList.get(rand).getHeadimgurl();
+            }
+
+            Result result = new Result();
+            result.userList = validUserList;
+            model.addAttribute(result);
+
+            model.addAttribute("userinfo", String.format("一共有%d人成功报名", validUserList.size()));
+            model.addAttribute("prize_id", 11);
+            model.addAttribute("prize_prize", qaService.getPrize().get(questionId - 1));
+            model.addAttribute("prize_user", prize_user);
+            model.addAttribute("prize_image", prize_image);
+
+            return "question";
         }
+    }
+
+    private List<User> findValidUsers(List<User> userList) {
+        List<User> validUsers = new ArrayList<>();
+        for (User user : userList) {
+            if (!TextUtils.isEmpty(user.getNickname()) && !TextUtils.isEmpty(user.getHeadimgurl())) {
+                validUsers.add(user);
+            }
+        }
+        return validUsers;
     }
 
     private boolean hasRightAnswerUser(Result result) {
