@@ -269,7 +269,6 @@ body {
     padding-left: 0.83333rem;
     margin-bottom: 0.36232rem;
     -webkit-appearance: none;
-    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 0.18116rem 0.20916rem;
     background-size: 0.33174rem;
 }
 
@@ -282,7 +281,6 @@ body {
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
-    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 0.18116rem -0.71284rem;
     background-size: 0.33174rem;
     padding-left: 0.83333rem;
 }
@@ -335,7 +333,6 @@ body {
 .form-login .identify {
     height: 0.90580rem;
     position: relative;
-    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 0.18116rem -0.71284rem;
     background-size: 0.33174rem;
     padding-left: 0.83333rem;
 }

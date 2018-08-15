@@ -23,4 +23,6 @@ public interface QAService {
     Result findResultFromQuestionId(int questionId);
 
     List<Question> getQA();
+
+    List<String> getPrize();
 }

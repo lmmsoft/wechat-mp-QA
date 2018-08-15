@@ -28,6 +28,21 @@ class QAServiceImpl implements QAService {
     @Resource
     private UserAnswerMapper userAnswerMapper;
 
+    private List<String> prizeList = Arrays.asList(
+            "迪士尼 迷你欢乐毯",
+            "家用卷蛋器",
+            "格兰仕 电饭煲",
+            "LOCK LOCK 保温水杯",
+            "芳恩 贴心服装毯",
+            "尚品 营养被",
+            "KMW 欧式复底锅",
+            "乐扣乐扣 保温饭盒",
+            "康宁 白色餐具六件组",
+            "福玛特 专业杀菌除螨仪",
+            "天然决明子 富硒磁疗能量枕",
+            "福玛特-扫地机器人"
+    );
+
     private List<Question> questionList = Arrays.asList(
 
             new Question(
@@ -98,7 +113,7 @@ class QAServiceImpl implements QAService {
             new Question(
                     6,
                     "爱好题",
-                    ">新郎喜欢运动，经常参加各地的马拉松，骑车，铁人三项，越野跑等比赛，请问他参加过最长的一场跑步比赛距离有多长？",
+                    "新郎喜欢运动，经常参加各地的马拉松，骑车，铁人三项，越野跑等比赛，请问他参加过最长的一场跑步比赛距离有多长？",
                     "新郎2018年01月27日参加了香港100千米越野跑大赛，连续奔跑近24小时，翻越了几十座大山，克服了诸多困难，顺利到达终点，最后拿到小铜人的奖励~",
                     64,
                     Arrays.asList(
@@ -241,6 +256,10 @@ class QAServiceImpl implements QAService {
 
         result.userList = userAnswerMapper.findUserByAnswerId(rightAnswerId);
 
+        if (result.userList.size() == 0) {
+            result.userList = userAnswerMapper.findUserByQuestionId(questionId);
+        }
+
         result.resultType = RESULE_SUCCEED;
         return result;
     }
@@ -248,6 +267,11 @@ class QAServiceImpl implements QAService {
     @Override
     public List<Question> getQA() {
         return questionList;
+    }
+
+    @Override
+    public List<String> getPrize() {
+        return prizeList;
     }
 
     private void initQuestionList() {

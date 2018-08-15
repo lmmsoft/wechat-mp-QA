@@ -4,30 +4,112 @@
 <head>
     <meta charset="UTF-8"/>
     <title>结果页</title>
+    <!--<link rel="stylesheet" href="../css/prize.css"/>-->
+    <style type="text/css">
+        .list-ul img {
+            width: 40px;
+        }
+
+        .list-ul {
+            display: inline-block; /*border:1px solid red;*/
+            width: 90%;
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .list-ul li {
+            display: inline-block;
+            width: 60px;
+        }
+
+        .pageItem {
+            float: left;
+            width: 40%;
+            border: 1px solid red;
+        }
+
+        .mark {
+            position: relative;
+        }
+
+        .mark-content {
+            width: 60%;
+            height: 50%;
+            background: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .prize-id, .prize-prize, .prize-user, .prize-image {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="page">
-    <div class="result-list">
-        <h2 th:text="${q.get(questionId).questionTitle}"></h2>
-        <ul>
-            <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(0).answerDescription}  : ${result.answerList.get(0).userCount}人|"></li>
-            <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(1).answerDescription}  : ${result.answerList.get(1).userCount}人|"></li>
-            <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(2).answerDescription}  : ${result.answerList.get(2).userCount}人|"></li>
-            <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(3).answerDescription}  : ${result.answerList.get(3).userCount}人|"></li>
-        </ul>
+    <div class="prize-id" th:text="|${prize_id}|">1</div>
+    <div class="prize-prize" th:text="${prize_prize}">迪士尼 迷你欢乐毯</div>
+    <div class="prize-user" th:text="${prize_user}">lmm333</div>
+    <div class="prize-image" th:text="${prize_image}">
+        http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132
     </div>
 
-    <div class="user-list">
-        <h3 th:text="|答对的用户${result.userList.size()}人, 他们是|">答对的用户x人}</h3>
-        <ul>
-            <li th:each="user : ${result.userList}">
-                <span th:text="${user.nickname}">lmm333</span>
-                <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132"
-                     th:src="${user.headimgurl}"/>
-            </li>
-        </ul>
-        <p class="date"><span th:text="${#dates.createNow()}">2015年2月3日</span></p>
+    <div class="pageItem left">
+        <div class="result-list">
+            <h2 th:text="${q.get(questionId).questionTitle}"></h2>
+            <ul>
+                <li th:text="|${result.answerList.get(0).answerId}.${q.get(questionId).answerList.get(0).answerDescription}  : ${result.answerList.get(0).userCount}人|"></li>
+                <li th:text="|${result.answerList.get(1).answerId}.${q.get(questionId).answerList.get(1).answerDescription}  : ${result.answerList.get(1).userCount}人|"></li>
+                <li th:text="|${result.answerList.get(2).answerId}.${q.get(questionId).answerList.get(2).answerDescription}  : ${result.answerList.get(2).userCount}人|"></li>
+                <li th:text="|${result.answerList.get(3).answerId}.${q.get(questionId).answerList.get(3).answerDescription}  : ${result.answerList.get(3).userCount}人|"></li>
+            </ul>
+        </div>
+
+        <div class="user-list">
+            <h3 th:text="${userinfo}">答对的用户x人}</h3>
+            <ul class="list-ul">
+                <li th:each="user : ${result.userList}">
+                    <span th:text="${user.nickname}">lmm333</span>
+                    <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132"
+                         th:src="${user.headimgurl}"/>
+                </li>
+            </ul>
+            <p class="date"><span th:text="${#dates.createNow()}">2015年2月3日</span></p>
+        </div>
+    </div>
+    <div class="pageItem right">
+        <section class="turntable-prize">
+            <div class="rotate-prize">
+                <div class="pointer"><img src="../img/pointer.png" alt="pointer"/></div>
+                <div class="rotate"><img id="rotate" src="../img/rotate.png" alt="turntable"/></div>
+            </div>
+
+            <div class="click-prize">
+                <a href="#" class="submit"><img src="../img/submit.png"/></a>
+            </div>
+
+            <div id="mark">
+                <div class="mark-content">
+                    <p>恭喜中奖</p>
+                    <p th:text="${prize_user}">张三</p>
+                    <img src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132"
+                         th:src="${prize_image}"/>
+                    <p th:text="${prize_prize}">张三</p>
+                </div>
+
+            </div>
+        </section>
     </div>
 </div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/awardRotate.js"></script>
+<script type="text/javascript" src="../js/jquery.marquee.min.js"></script>
+<script type="text/javascript" src="../js/prize.js"></script>
+
 </body>
 </html>

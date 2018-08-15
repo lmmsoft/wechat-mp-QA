@@ -51,6 +51,11 @@ public interface UserAnswerMapper {
             " WHERE t_user.wechatUserId = t_user_answer.wechatUserId AND t_user_answer.userAnswerIndex = #{userAnswerIndex}")
     List<User> findUserByAnswerId(@Param("userAnswerIndex") int userAnswerIndex);
 
+    @Select("SELECT * " +
+            " FROM t_user, t_user_answer " +
+            " WHERE t_user.wechatUserId = t_user_answer.wechatUserId AND t_user_answer.questionId = #{questionId}")
+    List<User> findUserByQuestionId(@Param("questionId") int questionId);
+
     // answerId count
     // 11       2
     // 12       1
