@@ -167,23 +167,6 @@ class QAServiceImpl implements QAService {
 
     public QAServiceImpl() {
         initQuestionList();
-
-
-//        answerQuestionMap.put(11, 1);
-//        answerQuestionMap.put(12, 1);
-//        answerQuestionMap.put(13, 1);
-//        answerQuestionMap.put(14, 1);
-//
-//        answerQuestionMap.put(21, 2);
-//        answerQuestionMap.put(22, 2);
-//        answerQuestionMap.put(23, 2);
-//        answerQuestionMap.put(24, 2);
-//
-//        questionAnswerMap.put(1, Arrays.asList(11, 12, 13, 14));
-//        questionAnswerMap.put(2, Arrays.asList(21, 22, 23, 24));
-//
-//        questionRightAnswerMap.put(1, 11);
-//        questionRightAnswerMap.put(2, 22);
     }
 
     @Override
@@ -243,7 +226,6 @@ class QAServiceImpl implements QAService {
             result.resultType = RESULE_INVALID_QUESTION_ID;
             return result;
         }
-
 
         // 没使用sql聚合函数，分多次(4次)查询结果，效率稍微差一点，但是应该也够了
         result.answerList = new ArrayList<>();

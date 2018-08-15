@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.List;
 
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -20,6 +22,9 @@ public class MsgServiceImpl implements MsgService {
     @Autowired
     private OAuthService oAuthService;
 
+    private static final List<String> stringList = Arrays.asList("愿您中奖~！", "万福金安，感谢有你^^", "大吉大利，晚上吃鸡!", "祝您财旺福旺身体旺!");
+    private static int index = 0;
+
     @Override
     public String handleWechatEvent(WxMpXmlMessage wxMessage) {
         String content = "谢谢！";
@@ -28,7 +33,7 @@ public class MsgServiceImpl implements MsgService {
 
         switch (wxMessage.getEvent()) {
             case WxConsts.EventType.SUBSCRIBE:
-                content = String.format("感谢您的关注\n%s", oAuthService.getOauthUrlText(wxMessage.getFromUser()));
+                content = String.format("感谢您关注明明和虹虹~\n%s", oAuthService.getOauthUrlText(wxMessage.getFromUser()));
                 user.setRegisterType(User.TYPE_SUBSCRIBED);
                 break;
             case WxConsts.EventType.UNSUBSCRIBE:
@@ -47,7 +52,8 @@ public class MsgServiceImpl implements MsgService {
         int answerId = parseInt(wxMessage.getContent().trim());
         if (answerId == -1) {
             //当做祝福话语，弹幕墙
-            content = handleGreetingWords(content);
+            //content = handleGreetingWords(content);
+            return "数据输入错误，请重新输入：" + content.trim();
 
         } else {
             content = handleAnswer(
@@ -81,14 +87,16 @@ public class MsgServiceImpl implements MsgService {
                 new Timestamp(createTime * 1000L));
 
         Enum.InsertAnswerResultType resultType = qaService.insertUserAnswer(user, userAnswer);
+
+        String firstString = String.format("第%d题的答案已收到\n%s", questionid, stringList.get(index++ % stringList.size()));
         switch (resultType) {
             case SucceedNoUserInfo:
-                return String.format("第%d题的答案已收到\n%s", questionid, oAuthService.getOauthUrlText(wechatUserId));
+                return String.format("%s\n%s", firstString, oAuthService.getOauthUrlText(wechatUserId));
             case Error:
                 return String.format("系统出错，请重试（questionId=%d,answerId=%d）", questionid, answerId);
             case Succeed:
             default:
-                return String.format("第%d题的答案已收到，愿您中奖~！", questionid);
+                return firstString;
         }
     }
 
@@ -108,6 +116,7 @@ public class MsgServiceImpl implements MsgService {
     }
 
     private String handleGreetingWords(String content) {
+        //TODO, save this
         return "谢谢您的祝福：" + content.trim();
     }
 }

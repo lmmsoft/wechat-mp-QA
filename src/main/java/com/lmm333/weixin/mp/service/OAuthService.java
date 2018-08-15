@@ -29,7 +29,7 @@ public class OAuthService {
     }
 
     String getOauthUrlText(String userId) {
-        return String.format("请点击链接： <a href=\"%s\">报名参加抽奖</a> ", getOauthUrl(userId));
+        return String.format("请先点击链接： <a href=\"%s\">报名参加抽奖</a> ", getOauthUrl(userId));
     }
 
     public WxMpUser getWxMpUser(
