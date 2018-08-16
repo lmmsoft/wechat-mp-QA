@@ -1,13 +1,4 @@
 $(function () {
-    $.ajax({
-        url: 'http://localhost:8080/result/1',
-        method: 'get',
-        success: function (res) {
-            console.log(res)
-            // $('.marquee').html()
-        }
-    });
-
     var rotateTimeOut = function () {
         $('#rotate').rotate({
             angle: 0,
@@ -20,7 +11,7 @@ $(function () {
     };
     var bRotate = false;
     // 转动
-    var rotateFn = function (awards, angles, imgSrc) {
+    var rotateFn = function (awards, angles) {
         bRotate = !bRotate;
         $('#rotate').stopRotate();
         $('#rotate').rotate({
@@ -28,12 +19,9 @@ $(function () {
             animateTo: angles + 1800,
             duration: 6000,
             callback: function () {
-                // console.log(arrPrize[0]);
                 bRotate = !bRotate;
                 $('#mark').fadeIn();
                 $('#mark').css("z-index", 4);
-                $('#mark .red-img').attr("src", imgSrc);
-                //alert(txt);
                 $('#mark').click(function () {
                     $(this).fadeOut();
                 })
@@ -42,52 +30,8 @@ $(function () {
     };
     $('.submit').click(function () {
         if (bRotate) return;//如果正在转动，点击时将不再重复执行
-        // ajax({
-        // 		url: 'post.php',
-        // 		type: 'POST',
-        // 		data: {'intro': 'post请求'},
-        // 		success:function(res){
-        // 			res = JSON.parse(res);
-        // 			document.getElementById('b').innerHTML = res.intro;
-        // 			console.log(res);
-        // 		},
-        //         error: function(error) {}
-        // 	});
-        var item = rnd(0, 7);
-        var arrPrize = ["img/prize5.png", "img/prize10.png", "img/prize20.png", "img/prize50.png", "img/prize100.png", "img/prize200.png", "img/prize500.png", "img/prize1000.png"];
-        switch (item) {
-            case 0:
-                rotateFn(0, 225, arrPrize[item]);
-                break;
-            case 1:
-                rotateFn(1, 135, arrPrize[item]);
-                break;
-            case 2:
-                rotateFn(2, 315, arrPrize[item]);
-                break;
-            case 3:
-                rotateFn(3, 45, arrPrize[item]);
-                break;
-            case 4:
-                rotateFn(4, 90, arrPrize[item]);
-                break;
-            case 5:
-                rotateFn(5, 270, arrPrize[item]);
-                break;
-            case 6:
-                rotateFn(6, 180, arrPrize[item]);
-                break;
-            case 7:
-                rotateFn(7, 360, arrPrize[item]);
-                break;
-        }
-    });
-    $("#marquee").marquee({
-        duration: 10000,
-        gap: 50,
-        delayBeforeStart: 0,
-        direction: 'left',
-        duplicated: true
+        var item = $('.prize-id').html() * 1;
+        rotateFn(item - 1, 360 - item * 30);
     });
 });
 

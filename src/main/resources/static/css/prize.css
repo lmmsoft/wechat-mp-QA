@@ -14,24 +14,6 @@ body {
     box-sizing: border-box;
 }
 
-height:
-
-362.319
-px
-
-;
-    margin: 0 auto;
-padding:
-
-16.3045
-px
-
-9.058
-px
-
-;
-    position: relative;
-
 .turntable-prize {
     box-sizing: border-box;
 }
@@ -127,7 +109,6 @@ px
     height: 48.913000000000004px;
     overflow: hidden;
     padding-left: 54.348px;
-    background: url(/Application/Public/img/zhuanpan/ruler-prize.png) no-repeat;
     background-size: 48.913000000000004px;
     /*display: inline-block;*/
 }
@@ -149,6 +130,7 @@ px
     font-size: 10.8695px;
     margin-top: 9.058px;
 }
+
 /*prize over*/
 /*login begin*/
 .logo-login {
@@ -175,31 +157,6 @@ px
     width: 100%;
 }
 
-.form-login, form {
-    /*width: 340.5795px;*/
-    width: 92%;
-    /*height: 178.44199999999998px;*/
-    margin: 5.4350000000000005px auto;
-    box-sizing: border-box;
-    overflow: hidden;
-    padding: 0;
-}
-
-.form-login input {
-    width: 100%;
-    height: 45.29px;
-    color: #333;
-    height: 38.9495px;
-    font-size: 16.3045px;
-    display: block;
-    border: none;
-    outline: none;
-    background: #fff;
-    margin: 0;
-    padding: 0;
-    /*border-radius: 4.529px;*/
-}
-
 ::-webkit-input-placeholder {
     color: #e9e9e9;
 }
@@ -210,30 +167,6 @@ px
 
 :-moz-placeholder {
     color: #e9e9e9;
-}
-
-.form-login .user {
-    height: 45.29px;
-    color: #333;
-    padding-left: 41.6665px;
-    margin-bottom: 18.116px;
-    -webkit-appearance: none;
-    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 9.058px 10.458px;
-    background-size: 16.587px;
-}
-
-.form-login .img-code {
-    width: 100%;
-    height: 45.29px;
-    color: #333;
-    text-align: center;
-    margin-bottom: 18.116px;
-    overflow: hidden;
-    position: relative;
-    box-sizing: border-box;
-    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 9.058px -35.642px;
-    background-size: 16.587px;
-    padding-left: 41.6665px;
 }
 
 .img-letter {
@@ -250,6 +183,7 @@ px
     display: block;
     float: left;
 }
+
 /*.form-login .img-code>input{
     width: 192.935px;
 }*/
@@ -278,14 +212,6 @@ px
     top: 0;
     right: 0;
     z-index: 6;
-}
-
-.form-login .identify {
-    height: 45.29px;
-    position: relative;
-    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 9.058px -35.642px;
-    background-size: 16.587px;
-    padding-left: 41.6665px;
 }
 
 .form-login .identify > input {
@@ -336,6 +262,7 @@ px
     font-size: 10.8695px;
     margin-top: 9.058px;
 }
+
 /*login over*/
 /*personal begin*/
 header {
@@ -427,4 +354,5 @@ header {
     text-align: left;
 
 }
+
 /*personal over*/
