@@ -11,6 +11,7 @@ import com.lmm333.weixin.mp.model.User;
 import com.lmm333.weixin.mp.model.UserAnswer;
 import com.lmm333.weixin.mp.model.UserRightAnswer;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -199,7 +200,7 @@ class QAServiceImpl implements QAService {
         User foundUser = userMapper.findByWechatUserId(user.getWechatUserId());
         if (foundUser == null) {
             try {
-                userMapper.insert(user);
+                userMapper.updateUser(user);
             } catch (Exception e) {
                 return Enum.InsertAnswerResultType.Error;
             }
@@ -220,10 +221,16 @@ class QAServiceImpl implements QAService {
         }
 
         // Handle userAnswer
-        boolean succeed = userAnswerMapper.replace(userAnswer);
-        if (succeed) {
-            return resultType;
-        } else {
+        try {
+            boolean succeed = userAnswerMapper.insert(userAnswer);
+            if (succeed) {
+                return resultType;
+            } else {
+                return Enum.InsertAnswerResultType.Error;
+            }
+        } catch (DuplicateKeyException e) {
+            return Enum.InsertAnswerResultType.DuplicateQuestionId;
+        } catch (Exception e) {
             return Enum.InsertAnswerResultType.Error;
         }
     }

@@ -66,10 +66,6 @@ public class MsgServiceImpl implements MsgService {
         return content;
     }
 
-    void updateUserRegisterType(User user) {
-        qaService.replaceUserRegisterType(user);
-    }
-
     String handleAnswer(String content, String wechatUserId, long createTime, int answerId) {
 
         int questionid = qaService.findQuestionIdFromAnswerId(answerId);
@@ -90,6 +86,8 @@ public class MsgServiceImpl implements MsgService {
 
         String firstString = String.format("第%d题的答案已收到\n%s", questionid, stringList.get(index++ % stringList.size()));
         switch (resultType) {
+            case DuplicateQuestionId:
+                return String.format("您已回答过第%d题，请确认后重新输入~", questionid);
             case SucceedNoUserInfo:
                 return String.format("%s\n%s", firstString, oAuthService.getOauthUrlText(wechatUserId));
             case Error:

@@ -5,6 +5,7 @@ public class Enum {
     public enum InsertAnswerResultType {
         Succeed,
         SucceedNoUserInfo,
+        DuplicateQuestionId,
         Error
     }
 }

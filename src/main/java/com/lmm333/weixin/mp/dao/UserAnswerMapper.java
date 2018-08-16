@@ -17,7 +17,7 @@ public interface UserAnswerMapper {
 
     @Insert("INSERT INTO t_user_answer(wechatUserId, questionId, userAnswerIndex, isright, updateTime)" +
             " VALUES( #{wechatUserId}, #{questionId}, #{userAnswerIndex}, #{isright}, #{updateTime} )")
-    void insert(UserAnswer userAnswer);
+    boolean insert(UserAnswer userAnswer);
 
     @Insert("REPLACE INTO t_user_answer(wechatUserId, questionId, userAnswerIndex, isright, updateTime)" +
             " VALUES( #{wechatUserId}, #{questionId}, #{userAnswerIndex}, #{isright}, #{updateTime} )")
