@@ -66,7 +66,7 @@ public class ResultController {
             if (hasRightAnswerUser) {
                 userinfo = String.format("答对%d人, 他们是:", result.userList.size());
             } else {
-                userinfo = String.format("没人答对, 所有答题的%d人都可以参与抽奖:", result.userList.size());
+                userinfo = String.format("没人答对, 所有参与答题的%d人都可以参与抽奖:", result.userList.size());
             }
 
             model.addAttribute("show_result_list", true);

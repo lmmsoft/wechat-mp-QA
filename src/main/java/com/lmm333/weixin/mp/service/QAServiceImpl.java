@@ -31,7 +31,7 @@ class QAServiceImpl implements QAService {
     private UserAnswerMapper userAnswerMapper;
 
     private List<String> prizeList = Arrays.asList(
-            "迪士尼 迷你欢乐毯",
+            "迪士尼 米妮欢乐毯",
             "家用卷蛋器",
             "格兰仕 电饭煲",
             "LOCK LOCK 保温水杯",
