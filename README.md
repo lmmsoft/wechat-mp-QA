@@ -68,66 +68,10 @@
 - 抽奖功能
 - 答案配置 
 
-```
-
-//图片请求
-
-接收微信请求：[signature=[2de424b864d676d87413fc3612a6deb27ec3c698], encType=[aes], msgSignature=[874d50d4459cf0b0741e3bc734a02b8bec766650], timestamp=[1532839645], nonce=[969889311], requestBody=[
-<xml>
-    <ToUserName><![CDATA[gh_ac6bbe3aac55]]></ToUserName>
-    <FromUserName><![CDATA[ok3SF1s4vWK48-1aM3b4p9gMq3Bs]]></FromUserName>
-    <CreateTime>1532839644</CreateTime>
-    <MsgType><![CDATA[image]]></MsgType>
-    <PicUrl><![CDATA[http://mmbiz.qpic.cn/mmbiz_jpg/BtcSiaAbRvkUiagyCtEZ2zPickiciaF8JHrzo3EGbBibQgbHARh46lV8ekQRickTM3hQBmRPWiaibBicM1Y934hHoic8F7LjQ/0]]></PicUrl>
-    <MsgId>6583496141424829266</MsgId>
-    <MediaId><![CDATA[MvvkxjFMY2w14eREEIUhGXBaQlpGrCs6cPXvOh9G-5W524Yb9flKID90j062n38Z]]></MediaId>
-    <Encrypt><![CDATA[yh8cmqvEMCAGObsGeEUJu6bmK9gCdcjXyXhO0EPy0l3VZ/QvNkpPzsNIZ4za/7kaCFRleY8Zn10ElVMaxatqP0GhUIkBporGQ9P5aGsuJzTfGe6E9Lwu7Jd08On+a4lcNSqJjtqcK5TdYUM9Dctgb3/Uh2OpaTrsBu5WStylQjt7GKAdAkyTUo3OMKenfyezvYxdpfQeddbDakwh/8W67+CNEXalUBl/PoDcWdyDAfz19Hnxa2qpSjBJPasKXZR0CuDNvrsS1Gj8f3o9Y8ZupbC1TJ05ggUY+SD2VSZQ8A2U0d0jkyUdqiafA3H8L0mho6wrRXmHoK8R9gujr0/HGGAqMRqAGJhTY6DCy1zRbUzWNcH0r0Ah+cMI2ONPDRMz1En+JG4lBWmo5H7m/2O5d9wYADvI0h1JAltinA0STNVXgzSsaLSYOhIaMORjeAq5OxnFFGc1VfitxtqxD8mqB/yVBA81azcFJdSnasQT27hGUdf6USDQPt9W4iAzzPplAOR7tg3gI8Tok28ux4OlLkT/oYV6YU8QrGgG6Az5XsZRSSngxLKggEC+scIa/wpZU2rADAs3EcUEEHIIxty22+/FnCr3K0sE/DrdCRerI1B/vTTY+BBSOZcbWeS/Gpcfy2n6+Z4A+Shd5DTozoL7SUvHVYEwvPWwJQ2cBR5ZJskBsPGjeul8U1kOqlYwzIxRpdgLH6w8tnVWcQhYCwnFkQ==]]></Encrypt>
-</xml>
-
-] 
-2018-07-29 12:47:26.714 DEBUG 5415 --- [nio-8080-exec-4] c.g.b.d.w.m.controller.WechatController  : 
-消息解密后内容为：
-WxMpXmlMessage[
-  toUser=gh_ac6bbe3aac55
-  fromUser=ok3SF1s4vWK48-1aM3b4p9gMq3Bs
-  createTime=1532839644
-  msgType=image
-  msgId=6583496141424829266
-  picUrl=http://mmbiz.qpic.cn/mmbiz_jpg/BtcSiaAbRvkUiagyCtEZ2zPickiciaF8JHrzo3EGbBibQgbHARh46lV8ekQRickTM3hQBmRPWiaibBicM1Y934hHoic8F7LjQ/0
-  mediaId=MvvkxjFMY2w14eREEIUhGXBaQlpGrCs6cPXvOh9G-5W524Yb9flKID90j062n38Z
-  scanCodeInfo=ScanCodeInfo[<all null values>]
-  sendPicsInfo=SendPicsInfo[
-  picList=[]
-]
-  sendLocationInfo=SendLocationInfo[<all null values>]
-  hardWare=HardWare[<all null values>]
-] 
-2018-07-29 12:47:26.716  INFO 5415 --- [pool-1-thread-9] c.g.b.demo.wx.mp.handler.LogHandler      : 
-接收到请求消息，内容：{"toUser":"gh_ac6bbe3aac55","fromUser":"ok3SF1s4vWK48-1aM3b4p9gMq3Bs","createTime":1532839644,"msgType":"image","msgId":6583496141424829266,"picUrl":"http://mmbiz.qpic.cn/mmbiz_jpg/BtcSiaAbRvkUiagyCtEZ2zPickiciaF8JHrzo3EGbBibQgbHARh46lV8ekQRickTM3hQBmRPWiaibBicM1Y934hHoic8F7LjQ/0","mediaId":"MvvkxjFMY2w14eREEIUhGXBaQlpGrCs6cPXvOh9G-5W524Yb9flKID90j062n38Z","scanCodeInfo":{},"sendPicsInfo":{"picList":[]},"sendLocationInfo":{},"hardWare":{}}
-2018-07-29 12:47:26.717 DEBUG 5415 --- [nio-8080-exec-4] c.g.b.d.w.m.controller.WechatController  : 
-组装回复信息：<xml>
-<Encrypt><![CDATA[hHLIS00AePBFsjWZ/dF1GCo4gHrV/CjMrwopLaa5/DnElV9sYTsmkOStAolDvyxLGGWeFFLHSxDxCCrh3bYwSUbVVPAD/OcfSLQ47vCsELJOkBaY//r5QcvzdJNYUT2RoJPN1CxggCeKERyIh14Q4P0mk7OfyfKKZtf16CYedXE3ZXy7SjgHZA3jBqv2Py9XnU1b/GOAs73WMMxdu3rjX63hmnPpyLba8gZ8HKeOeSlQOFQ758st/CGOkDL87pl0X7tWMTDu8+c4gdAU3n+C1BAaZIA0Af3C8BYLT5bEme590B4Z2dkuuuGgO01yiAlk1Vs2cyH1yQ3/lqtPpTYHrUeAILD2T1Vx0pAEs/0T1F88mVQYT2k9bik/VAxJSq0eVwjSoWbMYQXFpfXLNLimDRNdLDzxXz3Pj71cwKT20SbvpvCFM9r3pgTGJ3r6TrvMsy1GYNcTD1EWAfKnA620VCqPQpg18lXOfvMq2VYGRmZjkPAFeBUvkIm/9Ir/UtaPVLMj+5okhiqSkEzEftP4ysAPVRiXl1CyDYm8g6qQE0UDIrgUnkPBc+tsYFrbc/LdNU0zx58tiZgsBVH4OCPYhG3sbGU3ncFQ6WzNfaLKPfOamPwPhWPSoS675iABW/mugyEpRHOHl37ZALLqd8rUsVi2COvWavbk/7NILCeQwtfuAydQgoaKmiLBFta+SRa7BYmIUmucTBbQ2vfqjPP6Gwb8YVt9pbKLbvchVz7LY07Q6H0KziXP85xAPwITDsaS3oo/WeynChJg6JCS28kQPJaMGnSH+6XTA++rBVlYgBHNEu7mdptqlC6BC9EmsTdJ5i/Ph+sSXo+yBTF36glnGS1UM0X7c7YkrfdUjyeCsGIkAP65251h5ShIliBLHoVFi/z4naYzprDARMKFiaV/x57T0+eoERBymXceUmqJ7dIWmoTEuIzgLxgPfXGQKA74s6bEhU6N2NJRzzdVkmJSL1zJ21r700GhDxQqC0l6q2hUme3DB+8whiS0dQrgfNeH]]></Encrypt>
-<MsgSignature><![CDATA[f3b052203ea5624e00c3997daea07b38df79a0db]]></MsgSignature>
-<TimeStamp>1532839646</TimeStamp>
-<Nonce><![CDATA[5zfWgFeaYAysAFBS]]></Nonce>
-</xml>
-2018-07-29 12:47:26.718 DEBUG 5415 --- [nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Written [<xml>
-<Encrypt><![CDATA[hHLIS00AePBFsjWZ/dF1GCo4gHrV/CjMrwopLaa5/DnElV9sYTsmkOStAolDvyxLGGWeFFLHSxDxCCrh3bYwSUbVVPAD/OcfSLQ47vCsELJOkBaY//r5QcvzdJNYUT2RoJPN1CxggCeKERyIh14Q4P0mk7OfyfKKZtf16CYedXE3ZXy7SjgHZA3jBqv2Py9XnU1b/GOAs73WMMxdu3rjX63hmnPpyLba8gZ8HKeOeSlQOFQ758st/CGOkDL87pl0X7tWMTDu8+c4gdAU3n+C1BAaZIA0Af3C8BYLT5bEme590B4Z2dkuuuGgO01yiAlk1Vs2cyH1yQ3/lqtPpTYHrUeAILD2T1Vx0pAEs/0T1F88mVQYT2k9bik/VAxJSq0eVwjSoWbMYQXFpfXLNLimDRNdLDzxXz3Pj71cwKT20SbvpvCFM9r3pgTGJ3r6TrvMsy1GYNcTD1EWAfKnA620VCqPQpg18lXOfvMq2VYGRmZjkPAFeBUvkIm/9Ir/UtaPVLMj+5okhiqSkEzEftP4ysAPVRiXl1CyDYm8g6qQE0UDIrgUnkPBc+tsYFrbc/LdNU0zx58tiZgsBVH4OCPYhG3sbGU3ncFQ6WzNfaLKPfOamPwPhWPSoS675iABW/mugyEpRHOHl37ZALLqd8rUsVi2COvWavbk/7NILCeQwtfuAydQgoaKmiLBFta+SRa7BYmIUmucTBbQ2vfqjPP6Gwb8YVt9pbKLbvchVz7LY07Q6H0KziXP85xAPwITDsaS3oo/WeynChJg6JCS28kQPJaMGnSH+6XTA++rBVlYgBHNEu7mdptqlC6BC9EmsTdJ5i/Ph+sSXo+yBTF36glnGS1UM0X7c7YkrfdUjyeCsGIkAP65251h5ShIliBLHoVFi/z4naYzprDARMKFiaV/x57T0+eoERBymXceUmqJ7dIWmoTEuIzgLxgPfXGQKA74s6bEhU6N2NJRzzdVkmJSL1zJ21r700GhDxQqC0l6q2hUme3DB+8whiS0dQrgfNeH]]></Encrypt>
-<MsgSignature><![CDATA[f3b052203ea5624e00c3997daea07b38df79a0db]]></MsgSignature>
-<TimeStamp>1532839646</TimeStamp>
-<Nonce><![CDATA[5zfWgFeaYAysAFBS]]></Nonce>
-</xml>] as "application/xml;charset=UTF-8" using [org.springframework.http.converter.StringHttpMessageConverter@18a645fd]
-2018-07-29 12:47:26.718 DEBUG 5415 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Null ModelAndView returned to DispatcherServlet with name 'dispatcherServlet': assuming HandlerAdapter completed request handling
-2018-07-29 12:47:26.718 DEBUG 5415 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Successfully completed request
-```
-
-
-$.ajax({
-  url:jjj,
-  success:function(res){
-   $('#mark .red-img').attr("src",res.data.imgSrc);
-  },
- })
- 
  
  https://github.com/vlily/shareDemo/blob/master/mobile/prize/prize.html
+ 
+ bug:
+ 3. 有些用户信息会丢失？
+ 4. 更新幻灯片图片
+ 5. p11 p12加载动画
