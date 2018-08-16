@@ -82,7 +82,7 @@ public interface UserMapper {
                     SET("province = #{province}");
                 }
 
-                if (user.getWechatUserId() != null) {
+                if (user.getCountry() != null) {
                     SET("country = #{country}");
                 }
 
