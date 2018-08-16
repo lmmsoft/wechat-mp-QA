@@ -1,48 +1,5 @@
-@media screen and (min-width: 320px) {
-    html {
-        font-size: 42.67px
-    }
-}
-
-@media screen and (min-width: 360px) {
-    html {
-        font-size: 48px
-    }
-}
-
-@media screen and (min-width: 375px) {
-    html {
-        font-size: 50px
-    }
-}
-
-@media screen and (min-width: 414px) {
-    html {
-        font-size: 55.2px
-    }
-}
-
-@media screen and (min-width: 480px) {
-    html {
-        font-size: 64px
-    }
-}
-
-@media screen and (min-width: 640px) {
-    html {
-        font-size: 85.33px
-    }
-}
-
-@media screen and (min-width: 750px) {
-    html {
-        font-size: 100px
-    }
-}
-
 html, body {
     height: 100%;
-    background: #86c1d4;
 }
 
 body {
@@ -57,109 +14,93 @@ body {
     box-sizing: border-box;
 }
 
-/*prize begin*/
-.logo {
-    height: 2.64493rem;
-    text-align: center;
-    background-size: 1.19565rem 0.43478rem;
-}
+height:
 
-.logo img {
-    /*display: inline-block;*/
-    width: 4.27536rem;
-    height: 2.21014rem;
-    margin: 0.21739rem auto;
-}
+362.319
+px
 
-.scroll-bar {
-    height: 0.57971rem;
-    line-height: 0.57971rem;
-    overflow: hidden;
-    font-size: 0.21739rem;
-    background: rgba(255, 255, 255, 0.65);
-}
+;
+    margin: 0 auto;
+padding:
 
-.scroll-bar li {
-    color: #262623;
-    display: inline-block;
-    float: left;
-    padding-left: 0.8855rem;
-}
+16.3045
+px
+
+9.058
+px
+
+;
+    position: relative;
 
 .turntable-prize {
-    height: 7.24638rem;
-    margin: 0 auto;
-    padding: 0.32609rem 0.18116rem;
-    position: relative;
     box-sizing: border-box;
 }
 
 .turntable-prize p {
     color: #262623;
-    font-size: 0.25362rem;
-    display: inline-block;
+    font-size: 30px;
+    display: block;
 }
 
-.turntable-prize p:nth-child(1) {
-    float: left;
+/*
+.turntable-prize p:nth-child(1){
+   float: left;
 }
-
-.turntable-prize p:nth-child(2) {
+.turntable-prize p:nth-child(2){
     float: right;
-}
-
+}*/
 .turntable-prize p span {
     color: #ffc412;
 }
 
 .turntable-prize .rotate-prize {
-    height: 5.14493rem;
-    width: 5.14493rem;
+    height: 257.24649999999997px;
+    width: 257.24649999999997px;
     margin: 0 auto;
     position: relative;
-    background-size: 5.14493rem 5.14493rem;
+    background-size: 257.24649999999997px 257.24649999999997px;
 }
 
 .turntable-prize .pointer {
-    width: 1.81159rem;
-    height: 1.23188rem;
+    width: 90.5795px;
+    height: 61.594px;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -1.20580rem;
-    margin-top: -0.59594rem;
+    margin-left: -49.29px;
+    margin-top: -17.797px;
     z-index: 1;
 }
 
 .turntable-prize .pointer img {
-    width: 1.81159rem;
-    height: 1.23188rem;
+    width: 90.5795px;
+    height: 61.594px;
 }
 
 .turntable-prize .rotate {
-    width: 4.67391rem;
-    height: 4.67391rem;
+    width: 233.6955px;
+    height: 233.6955px;
     position: absolute;
-    left: 0.25rem;
-    top: 0.25rem;
+    left: 12.5px;
+    top: 12.5px;
 }
 
 .turntable-prize .rotate img {
-    width: 4.67391rem;
-    /*height: 4.67391rem;*/
+    width: 233.6955px;
+    /*height: 233.6955px;*/
 }
 
 .turntable-prize .click-prize {
-    width: 2.82609rem;
-    height: 0.86957rem;
+    width: 141.30450000000002px;
+    height: 43.4785px;
     /*display: inline-block;*/
     text-align: center;
-    margin: 0.47101rem auto;
+    margin: 23.5505px auto;
 }
 
 .turntable-prize .submit img {
-    width: 2.82609rem;
-    height: 0.86957rem;
+    width: 141.30450000000002px;
+    height: 43.4785px;
 }
 
 #mark {
@@ -170,6 +111,7 @@ body {
     top: 0;
     left: 0;
     display: none;
+    z-index: 99;
 }
 
 .red-img {
@@ -182,43 +124,50 @@ body {
 }
 
 .rule-prize ul {
-    height: 1rem;
+    height: 48.913000000000004px;
     overflow: hidden;
-    padding-left: 1.08696rem;
-    background-size: 0.97826rem;
+    padding-left: 54.348px;
+    background: url(/Application/Public/img/zhuanpan/ruler-prize.png) no-repeat;
+    background-size: 48.913000000000004px;
     /*display: inline-block;*/
 }
 
 .rule-prize li {
-    height: 0.25rem;
+    height: 12.681000000000001px;
     color: #262623;
-    font-size: 0.25362rem;
+    font-size: 12.681000000000001px;
     /*display: inline-block;*/
 }
 
 .rule-prize li:nth-child(2) {
-    margin: 0.05435rem 0;
+    margin: 2.7175000000000002px 0;
 }
 
+.rule-prize p {
+    color: #fff;
+    text-align: center;
+    font-size: 10.8695px;
+    margin-top: 9.058px;
+}
 /*prize over*/
 /*login begin*/
 .logo-login {
     width: 100%;
-    /*height:6.08696rem;*/
+    /*height:304.348px;*/
     margin: 0 auto;
     text-align: center;
 }
 
 .logo-login .logo1 {
-    width: 1.77536rem;
-    height: 0.65217rem;
-    margin: 0.25362rem auto;
+    width: 88.768px;
+    height: 32.6085px;
+    margin: 12.681000000000001px auto;
 }
 
 .logo-login .tittle-login {
-    width: 5.36232rem;
-    height: 2.97101rem;
-    margin: 0.97826rem auto;
+    width: 268.11600000000004px;
+    height: 148.5505px;
+    margin: 48.913000000000004px auto;
     display: block;
 }
 
@@ -227,10 +176,10 @@ body {
 }
 
 .form-login, form {
-    /*width: 6.81159rem;*/
+    /*width: 340.5795px;*/
     width: 92%;
-    /*height: 3.56884rem;*/
-    margin: 0.10870rem auto;
+    /*height: 178.44199999999998px;*/
+    margin: 5.4350000000000005px auto;
     box-sizing: border-box;
     overflow: hidden;
     padding: 0;
@@ -238,17 +187,17 @@ body {
 
 .form-login input {
     width: 100%;
-    height: 0.90580rem;
+    height: 45.29px;
     color: #333;
-    height: 0.77899rem;
-    font-size: 0.32609rem;
+    height: 38.9495px;
+    font-size: 16.3045px;
     display: block;
     border: none;
     outline: none;
     background: #fff;
     margin: 0;
     padding: 0;
-    /*border-radius: 0.09058rem;*/
+    /*border-radius: 4.529px;*/
 }
 
 ::-webkit-input-placeholder {
@@ -264,34 +213,36 @@ body {
 }
 
 .form-login .user {
-    height: 0.90580rem;
+    height: 45.29px;
     color: #333;
-    padding-left: 0.83333rem;
-    margin-bottom: 0.36232rem;
+    padding-left: 41.6665px;
+    margin-bottom: 18.116px;
     -webkit-appearance: none;
-    background-size: 0.33174rem;
+    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 9.058px 10.458px;
+    background-size: 16.587px;
 }
 
 .form-login .img-code {
     width: 100%;
-    height: 0.90580rem;
+    height: 45.29px;
     color: #333;
     text-align: center;
-    margin-bottom: 0.36232rem;
+    margin-bottom: 18.116px;
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
-    background-size: 0.33174rem;
-    padding-left: 0.83333rem;
+    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 9.058px -35.642px;
+    background-size: 16.587px;
+    padding-left: 41.6665px;
 }
 
 .img-letter {
     width: 70% !important;
     display: block;
     float: left;
-    margin-top: 0.18116rem;
+    margin-top: 9.058px;
     position: absolute;
-    top: 0.09058rem;
+    top: 4.529px;
 }
 
 .picCodeImg {
@@ -299,19 +250,18 @@ body {
     display: block;
     float: left;
 }
-
 /*.form-login .img-code>input{
-    width: 3.85870rem;
+    width: 192.935px;
 }*/
 .identify-code {
     position: absolute;
-    top: 0.09058rem;
+    top: 4.529px;
 }
 
 .form-login .img-code img {
-    width: 2.81957rem;
-    height: 0.90580rem;
-    line-height: 0.89980rem;
+    width: 140.9785px;
+    height: 45.29px;
+    line-height: 44.99px;
     display: inline-block;
     position: absolute;
     top: 0;
@@ -320,9 +270,9 @@ body {
 }
 
 #VerifyImage {
-    width: 2.81957rem;
-    height: 0.90580rem;
-    line-height: 0.89980rem;
+    width: 140.9785px;
+    height: 45.29px;
+    line-height: 44.99px;
     display: inline-block;
     position: absolute;
     top: 0;
@@ -331,24 +281,25 @@ body {
 }
 
 .form-login .identify {
-    height: 0.90580rem;
+    height: 45.29px;
     position: relative;
-    background-size: 0.33174rem;
-    padding-left: 0.83333rem;
+    background: #fff url(/Application/Public/img/zhuanpan/login-icon.png) no-repeat 9.058px -35.642px;
+    background-size: 16.587px;
+    padding-left: 41.6665px;
 }
 
 .form-login .identify > input {
-    width: 3.85870rem;
+    width: 192.935px;
 }
 
 .form-login .identify .send-btn {
     color: #87c0d5;
-    font-size: 0.46609rem;
+    font-size: 23.3045px;
     outline: none;
     border: 0;
-    width: 2.81957rem;
-    height: 0.90580rem;
-    padding: 0 0.07246rem;
+    width: 140.9785px;
+    height: 45.29px;
+    padding: 0 3.6229999999999998px;
     display: inline-block;
     position: absolute;
     background: rgb(226, 226, 226);
@@ -359,40 +310,39 @@ body {
 }
 
 .form-login .btn {
-    height: 0.90580rem;
-    line-height: 0.90580rem;
+    height: 45.29px;
+    line-height: 45.29px;
     padding-top: 0;
-    font-size: 0.38043rem;
+    font-size: 19.0215px;
     font-weight: bold;
     color: #fff;
-    margin-top: 0.47101rem;
+    margin-top: 23.5505px;
     background: rgb(254, 197, 17);
     box-sizing: border-box;
 }
 
 .footer {
-    margin-top: 1.19275rem;
-    height: 0.90580rem;
-    line-height: 0.90580rem;
+    margin-top: 59.637499999999996px;
+    height: 45.29px;
+    line-height: 45.29px;
     text-align: center;
 }
 
 .footer p {
-    height: 0.90580rem;
-    line-height: 0.90580rem;
+    height: 45.29px;
+    line-height: 45.29px;
     color: #fff;
     text-align: center;
-    font-size: 0.21739rem;
-    margin-top: 0.18116rem;
+    font-size: 10.8695px;
+    margin-top: 9.058px;
 }
-
 /*login over*/
 /*personal begin*/
 header {
-    height: 1.19565rem;
-    line-height: 1.19565rem;
+    height: 59.782500000000006px;
+    line-height: 59.782500000000006px;
     color: #fff;
-    font-size: 0.39855rem;
+    font-size: 19.927500000000002px;
     background: #000;
     text-align: center;
 }
@@ -406,59 +356,59 @@ header {
 }
 
 .logo-personal img {
-    width: 1.77536rem;
-    height: 0.65217rem;
-    margin: 0.21739rem auto;
+    width: 88.768px;
+    height: 32.6085px;
+    margin: 10.8695px auto;
 }
 
 .infor-personal {
-    width: 6.77536rem;
-    height: 1.88406rem;
-    margin: 0.25362rem auto;
+    width: 338.76800000000003px;
+    height: 94.203px;
+    margin: 12.681000000000001px auto;
     position: relative;
 }
 
 .infor-personal .avater {
-    width: 1.88406rem;
-    height: 1.88406rem;
+    width: 94.203px;
+    height: 94.203px;
     background: #fec511;
 }
 
 .infor-personal .avater img {
-    width: 1.88406rem;
-    height: 1.88406rem;
+    width: 94.203px;
+    height: 94.203px;
 }
 
 .infor-personal .points {
-    width: 4.78261rem;
-    height: 1.88406rem;
+    width: 239.1305px;
+    height: 94.203px;
     position: absolute;
     top: 0;
-    left: 2.04710rem;
+    left: 102.35499999999999px;
     overflow: hidden;
 }
 
 .infor-personal .points p {
-    width: 4.78261rem;
-    height: 0.57971rem;
-    line-height: 0.57971rem;
+    width: 239.1305px;
+    height: 28.9855px;
+    line-height: 28.9855px;
     background: #fff;
-    margin-bottom: 0.10870rem;
+    margin-bottom: 5.4350000000000005px;
 }
 
 .infor-personal .points p span {
-    font-size: 0.25362rem;
+    font-size: 12.681000000000001px;
 }
 
 .infor-personal .points p span:first-child {
     color: #538fa4;
     float: left;
-    margin-left: 0.25362rem;
+    margin-left: 12.681000000000001px;
 }
 
 .infor-personal .points p span:last-child {
     float: right;
-    margin-right: 0.25362rem;
+    margin-right: 12.681000000000001px;
 }
 
 .infor-personal .points p:last-child {
@@ -467,15 +417,14 @@ header {
 
 .rules-personal {
     height: auto;
-    margin: 0.32609rem 0;
+    margin: 16.3045px 0;
     background: #fff;
 }
 
 .rules-personal p {
-    font-size: 0.28986rem;
-    padding: 0.65217rem 0.43478rem;
+    font-size: 14.493px;
+    padding: 32.6085px 21.739px;
     text-align: left;
 
 }
-
 /*personal over*/
