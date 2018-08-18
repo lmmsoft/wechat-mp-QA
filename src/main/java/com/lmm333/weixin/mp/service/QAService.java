@@ -17,6 +17,8 @@ public interface QAService {
 
     void replaceUserRegisterType(User user);
 
+    void updateUserRegisterType(User user);
+
     Enum.InsertAnswerResultType insertUserAnswer(User user, UserAnswer userAnswer);
 
     int findQuestionIdFromAnswerId(int answerId);

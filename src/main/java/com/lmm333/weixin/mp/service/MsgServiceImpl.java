@@ -35,13 +35,14 @@ public class MsgServiceImpl implements MsgService {
             case WxConsts.EventType.SUBSCRIBE:
                 content = String.format("感谢您关注明明和虹虹~\n%s", oAuthService.getOauthUrlText(wxMessage.getFromUser()));
                 user.setRegisterType(User.TYPE_SUBSCRIBED);
+                qaService.replaceUserRegisterType(user);
                 break;
             case WxConsts.EventType.UNSUBSCRIBE:
                 user.setRegisterType(User.TYPE_UNSUBSCRIBED);
+                qaService.updateUserRegisterType(user);
                 break;
         }
-        qaService.replaceUserRegisterType(user);
-
+        
         return content;
     }
 

@@ -39,7 +39,7 @@ public class OAuthService {
         //Step 1: Save code first
         User user = new User(state, User.TYPE_WECHAT_OAUTHED)
                 .setCode(code);
-        userMapper.updateUser(user);
+        userMapper.replaceUserRegisterTypeByWechatUserId(user);
 
         //Step 2: get and save token info
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);

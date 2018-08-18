@@ -188,6 +188,11 @@ class QAServiceImpl implements QAService {
 
     @Override
     public void replaceUserRegisterType(User user) {
+        userMapper.replaceUserRegisterTypeByWechatUserId(user);
+    }
+
+    @Override
+    public void updateUserRegisterType(User user) {
         userMapper.updateUser(user);
     }
 
