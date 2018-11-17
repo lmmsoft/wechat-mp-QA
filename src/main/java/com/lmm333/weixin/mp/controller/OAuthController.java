@@ -51,7 +51,7 @@ public class OAuthController {
 
         String message;
         try {
-            WxMpUser wxMpUser = oAuthService.getWxMpUser(code, state);
+            WxMpUser wxMpUser = oAuthService.handleOAuthResultAndGetWxMpUser(code, state);
             message = wxMpUser.getNickname() + "恭喜，报名成功~~~!\n您现在可以关闭网页，直接在公众号文本框里发送答案参与抽奖~";
         } catch (Exception e) {
             e.printStackTrace();

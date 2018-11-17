@@ -188,7 +188,17 @@ class QAServiceImpl implements QAService {
 
     @Override
     public void replaceUserRegisterType(User user) {
-        userMapper.replaceUserRegisterTypeByWechatUserId(user);
+        // 为了保存以前取关前取得的用户数据
+        // step1：查询用户是否存在
+        User foundUser = userMapper.findByWechatUserId(user.getWechatUserId());
+        if (foundUser == null) {
+            // 插入新用户
+            userMapper.replaceUserRegisterTypeByWechatUserId(user);
+        } else {
+            // 更新用户状态
+            foundUser.setRegisterType(user.getRegisterType());
+            userMapper.updateUser(foundUser);
+        }
     }
 
     @Override
@@ -205,7 +215,7 @@ class QAServiceImpl implements QAService {
         User foundUser = userMapper.findByWechatUserId(user.getWechatUserId());
         if (foundUser == null) {
             try {
-                userMapper.updateUser(user);
+                userMapper.updateUser(user);//TODO: 这里似乎不能插入新用户，要用insert或者replaceUserRegisterTypeByWechatUserId才行
             } catch (Exception e) {
                 return Enum.InsertAnswerResultType.Error;
             }

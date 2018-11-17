@@ -29,6 +29,7 @@ public class MsgServiceImpl implements MsgService {
     public String handleWechatEvent(WxMpXmlMessage wxMessage) {
         String content = "谢谢！";
 
+        //对于普通公众号，只能拿到 wechatUserId 和 event两种信息
         User user = new User(wxMessage.getFromUser(), User.TYPE_SUBSCRIBED);
 
         switch (wxMessage.getEvent()) {

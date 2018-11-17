@@ -15,6 +15,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 @Component
 public class UnsubscribeHandler extends AbstractHandler {
 
+    //取关事件不在这里，在MsgHandler里面，配置见 WechatMpConfiguration的 取消关注事件的Router
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
                                     Map<String, Object> context,

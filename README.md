@@ -15,7 +15,7 @@
 1. 配置微信公众号中的接口地址：http://my-domain.tunnel.qydev.com/wechat/portal （注意my-domain要跟上面的一致，需要符合微信官方的要求）；
 1. 根据自己需要修改各个handler的实现，加入自己的业务逻辑。
 
-## ngrok
+## ngrok(内网穿透代理，用于把微信公众号的请求转发到本地环境，方便调试)
 1. 非windows不能使用原ngrok.exe，下载[ngrok for mac](https://ngrok.com/download)
 2. ./ngrok http 80 开启内网80端口的穿透，会返回一个临时网址，类似 于http://123456.ngrok.io 
 3. 把网址 http://123456.ngrok.io/wechat/portal 填入微信公众号的后台
@@ -60,6 +60,12 @@
     $ docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -d mysql:5.7
     ```
 1. MySQL emoji存储问题，数据库编码设置utf8mb4，修改连接字符串，详见相关commit
+
+## 部署上线
+- 部署到Azure
+    - 使用intellij IDE的Azure插件（已配置好）
+- 部署到gfit网站
+
 ## 需求列表
 
 - 自动反馈
@@ -75,3 +81,8 @@
  3. 有些用户信息会丢失？
  4. 更新幻灯片图片
  5. p11 p12加载动画
+ 
+ ## 杭州婚礼待办事项
+ - 自动授权页面UI
+ - 抽奖页面
+ - [x]关注和取关会删除用户信息bug
