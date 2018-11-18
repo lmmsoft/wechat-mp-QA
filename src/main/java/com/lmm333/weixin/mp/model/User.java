@@ -3,12 +3,12 @@ package com.lmm333.weixin.mp.model;
 public class User {
     public static final int TYPE_SUBSCRIBED = 0;
     public static final int TYPE_WECHAT_OAUTHED = 1;
-    public static final int TYPE_PERSONAL_REGIESTERED = 2;
+    public static final int TYPE_WECHAT_OAUTHED_FOR_HANGZHOU_MARRAIGE = 2;
     public static final int TYPE_UNSUBSCRIBED = 9;
 
     private int id;
     private String wechatUserId;
-    private int registerType;//0已关注没注册 1微信注册 2个人注册 9已取关
+    private int registerType;//0已关注没注册 1微信注册 2微信注册报名杭州婚礼现场抽奖 9已取关
 
     private String nickname;
     private String headimgurl;

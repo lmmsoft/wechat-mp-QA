@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -82,13 +83,56 @@ public class ResultController {
 
             return "question";
         } else if (questionId == 12) {
-
+            //page12 答对题目数量排名
             List<UserRightAnswer> result = qaService.findUserRightAnswerList();
             model.addAttribute("result", result);
 
             return "questionright";
+        } else if (questionId == 101 || questionId == 102 || questionId == 103) {
+            //显示所有杭州场报名用户
+            model.addAttribute("show_result_list", false);
+
+            List<User> validUserList = findHangzhouRegisterUsers(qaService.getAllUser());
+            String prize_user = "【没有有效用户】";
+            String prize_image = "http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eo5FcvGCNgctPk4aYszHdAh3E5PAqt98E1YwA55qgUdPp8ohbjKY2BqnBbJedXqxh2yibSpGpDTmfA/132";
+
+            //乱序一下用户
+            Collections.shuffle(validUserList);
+
+            if (validUserList.size() != 0) {
+                int rand = new Random().nextInt(validUserList.size());
+                prize_user = validUserList.get(rand).getNickname();
+                prize_image = validUserList.get(rand).getHeadimgurl();
+            }
+
+            Result result = new Result();
+            result.userList = validUserList;
+            model.addAttribute(result);
+
+            String prize_prize = "";
+            int prize_id = 11;
+            switch (questionId) {
+                case 101:
+                    prize_prize = "Debo 汤锅";
+                    break;
+                case 102:
+                    prize_prize = "九阳 电烤箱";
+                    break;
+                case 103:
+                    prize_prize = "派德金 扫地机器人";
+                    prize_id = 0;
+                    break;
+            }
+
+            model.addAttribute("userinfo", String.format("一共有%d人成功报名", validUserList.size()));
+            model.addAttribute("prize_id", prize_id);
+            model.addAttribute("prize_prize", prize_prize);
+            model.addAttribute("prize_user", prize_user);
+            model.addAttribute("prize_image", prize_image);
+
+            return "hangzhouluckydraw";
         } else {
-            //统计页11
+            //page11 参与奖
             model.addAttribute("show_result_list", false);
 
             List<User> validUserList = findValidUsers(qaService.getAllUser());
@@ -119,6 +163,18 @@ public class ResultController {
         List<User> validUsers = new ArrayList<>();
         for (User user : userList) {
             if (!TextUtils.isEmpty(user.getNickname()) && !TextUtils.isEmpty(user.getHeadimgurl())) {
+                validUsers.add(user);
+            }
+        }
+        return validUsers;
+    }
+
+    private List<User> findHangzhouRegisterUsers(List<User> userList) {
+        List<User> validUsers = new ArrayList<>();
+        for (User user : userList) {
+            if (!TextUtils.isEmpty(user.getNickname())
+                    && !TextUtils.isEmpty(user.getHeadimgurl())
+                    && user.getRegisterType() == User.TYPE_WECHAT_OAUTHED_FOR_HANGZHOU_MARRAIGE) {
                 validUsers.add(user);
             }
         }

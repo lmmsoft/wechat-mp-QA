@@ -52,7 +52,7 @@ public class OAuthController {
         String message;
         try {
             WxMpUser wxMpUser = oAuthService.handleOAuthResultAndGetWxMpUser(code, state);
-            message = wxMpUser.getNickname() + "恭喜，报名成功~~~!\n您现在可以关闭网页，直接在公众号文本框里发送答案参与抽奖~";
+            message = wxMpUser.getNickname() + " 恭喜，婚礼抽奖报名成功~~~!";
         } catch (Exception e) {
             e.printStackTrace();
             message = "报名出错，请联系管理员，错误信息:\n " + e.getMessage();

@@ -29,17 +29,17 @@ public class OAuthService {
     }
 
     String getOauthUrlText(String userId) {
-        return String.format("请先点击链接： <a href=\"%s\">报名参加抽奖</a> ", getOauthUrl(userId));
+        return String.format("请先点击: <a href=\"%s\">报名婚礼抽奖</a> ", getOauthUrl(userId));
     }
 
-    public WxMpUser getWxMpUser(
+    public WxMpUser handleOAuthResultAndGetWxMpUser(
             @RequestParam("code") String code,
             @RequestParam("state") String state)
             throws Exception {
         //Step 1: Save code first
-        User user = new User(state, User.TYPE_WECHAT_OAUTHED)
+        User user = new User(state, User.TYPE_WECHAT_OAUTHED_FOR_HANGZHOU_MARRAIGE)
                 .setCode(code);
-        userMapper.replaceUserRegisterTypeByWechatUserId(user);
+        userMapper.replaceUserRegisterTypeByWechatUserId(user);// for insert if not exist, can not use userMapper.updateUser(user); here
 
         //Step 2: get and save token info
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
