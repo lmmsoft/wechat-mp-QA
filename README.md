@@ -8,7 +8,7 @@
 
 -----------------------
 
-## 使用步骤：
+## <del>使用步骤：</del>
 1. 配置：复制`/src/main/resources/application.yml.template` 生成application.yml文件，根据自己需要填写相关配置（需要注意的是：yml文件内的属性冒号后面的文字之前需要加空格，可参考已有配置，否则属性会设置不成功）；	
 1. 运行Java程序：`WxMpDemoApplication`；
 1. 打开shell或cmd，进入ngrok目录，运行 `ngrok -config ngrok.cfg -subdomain my-domain 8080` 如果运行失败，请更换my-domain为其它字符串，直至连接成功；
@@ -17,8 +17,8 @@
 
 ## ngrok(内网穿透代理，用于把微信公众号的请求转发到本地环境，方便调试)
 1. 非windows不能使用原ngrok.exe，下载[ngrok for mac](https://ngrok.com/download)
-2. ./ngrok http 80 开启内网80端口的穿透，会返回一个临时网址，类似 于http://123456.ngrok.io 
-3. 把网址 http://123456.ngrok.io/wechat/portal 填入微信公众号的后台
+2. ./ngrok http 8080 开启内网8080端口的穿透，会返回一个临时网址，类似 于http://123456.ngrok.io 
+3. 把网址 http://123456.ngrok.io/wechat/portal 填入微信公众号的后台，微信的请求会自动转发到本地
 3. 更多ngrok信息请参阅[ngrok官方文档](https://ngrok.com/docs)
 	
 ## 加解密的异常处理办法
@@ -62,14 +62,15 @@
 1. MySQL emoji存储问题，数据库编码设置utf8mb4，修改连接字符串，详见相关commit
 
 ## 部署上线
-- 本地运行（已配置好）
-- 本地打包jar（已配置好）
-- 部署到Azure
-    - 使用intellij IDE的Azure插件（已配置好）
+- 本地调试运行（已配置好）
+- 本地打包jar（已配置好） maven clean
+- 部署到Azure 已配置好）
+    - 使用intellij IDE的Azure插件
     - 一键打包+部署
 - 部署到gfit网站
     - 手动打包
     - 手动scp到远程服务器
+    - 手动kill旧的实例
     - 手动从docker中启动
 
 ## 需求列表
@@ -77,30 +78,33 @@
 - 自动反馈
 - 时间日志
 - 结果显示
-- 抽奖功能
+- 抽奖功能  https://github.com/vlily/shareDemo/blob/master/mobile/prize/prize.html
 - 答案配置 
 
- 
- https://github.com/vlily/shareDemo/blob/master/mobile/prize/prize.html
- 
- bug:
+## bug:
  3. 有些用户信息会丢失？
  4. 更新幻灯片图片
  5. p11 p12加载动画
+ 6. 点击抽奖时网页会跳动
  
  ## 杭州婚礼待办事项
- - [x]自动授权页面UI
- - [x]抽奖页面
- - [x]关注和取关会删除用户信息bug
+ 
+ - [x] 自动授权页面UI
+ - [x] 抽奖页面
+ - [x] 关注和取关会删除用户信息bug
  
  ## 路由情况
- - 关注
+ - 微信公众号oauth授权与回调页面
     - /
     - /oauth
 - 问题
-    - 问题列表 /qa.html
-    - 抽奖页面 /question/1 (数字为题目id)
+    - 问题列表
+        - /qa.html 南京问题与抽奖页面
+        - /qahz.html 杭州问题与抽奖页面
+    - 抽奖页面
+        - /question/1 (数字为题目id) 问题抽奖页面
+        - /hangzhouluckeydraw 随机抽奖页面
 - 其他
-    - hello
-    - version
-    - go
+    - /hello
+    - /version
+    - /go
